@@ -1,8 +1,19 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const puppeteer = require('puppeteer');
 const fs = require('fs');
+// Use puppeteer-core with chrome-aws-lambda for serverless, fallback to puppeteer for local dev
+let puppeteer;
+let chrome;
+try {
+  puppeteer = require('puppeteer-core');
+  chrome = require('chrome-aws-lambda');
+} catch (e) {
+  // In local dev environment, fallback to regular puppeteer
+  puppeteer = require('puppeteer');
+}
+
+// Duplicate imports removed; puppeteer handling defined earlier
 
 const app = express();
 const PORT = process.env.PORT || 3000;
