@@ -80,269 +80,265 @@
     </div>
   </div>
 
-  <!-- CONTAINER 1: FORMULÁRIO CENTRAL ESPAÇOSO (VIEW PADRÃO) -->
-  <main class="editor-central-container" id="view-form-container">
-    
-    <!-- CARD 1: DADOS DO CLIENTE E DA PROPOSTA -->
-    <section class="form-card highlight-card">
-      <div class="form-card-header">
-        <div class="form-card-title">
-          <span>🏢</span>
-          <span>1. Dados do Condomínio & Proposta Comercial</span>
+  <!-- WORKSPACE MASTER: CONTÉM O FORMULÁRIO E A PRÉVIA DE FORMA ESTÁVEL -->
+  <div class="workspace-layout mode-form" id="workspace-layout">
+
+    <!-- PAINEL 1: FORMULÁRIO DE EDIÇÃO -->
+    <main class="editor-central-container" id="view-form-container">
+      
+      <!-- CARD 1: DADOS DO CLIENTE E DA PROPOSTA -->
+      <section class="form-card highlight-card">
+        <div class="form-card-header">
+          <div class="form-card-title">
+            <span>🏢</span>
+            <span>1. Dados do Condomínio & Proposta Comercial</span>
+          </div>
+          <span class="form-card-badge">Capa e Cabeçalhos</span>
         </div>
-        <span class="form-card-badge">Informações da Capa e Cabeçalhos</span>
+
+        <div class="form-grid-2">
+          <div class="form-group-large span-2">
+            <label class="form-label-large" for="clientName">
+              Nome do Condomínio / Edifício
+              <small>(Aparece em destaque na capa do orçamento)</small>
+            </label>
+            <input type="text" id="clientName" class="form-input-large" value="EDIFÍCIO CARVALHO" placeholder="Ex: EDIFÍCIO CARVALHO" />
+          </div>
+
+          <div class="form-group-large">
+            <label class="form-label-large" for="proposalTitle">Título da Proposta</label>
+            <input type="text" id="proposalTitle" class="form-input-large" value="Proposta Reforma e Revitalização de Fachada" />
+          </div>
+
+          <div class="form-group-large">
+            <label class="form-label-large" for="proposalVersion">Versão da Proposta</label>
+            <input type="text" id="proposalVersion" class="form-input-large" value="versão 1" />
+          </div>
+
+          <div class="form-group-large">
+            <label class="form-label-large" for="proposalDate">Data de Emissão</label>
+            <input type="text" id="proposalDate" class="form-input-large" value="26/09/2026" />
+          </div>
+
+          <div class="form-group-large">
+            <label class="form-label-large" for="validityDays">Validade da Proposta (Dias)</label>
+            <input type="number" id="validityDays" class="form-input-large" value="30" />
+          </div>
+        </div>
+      </section>
+
+      <!-- CARD 2: TABELA DE PREÇOS E ESCOPOS (SLIDE 13) -->
+      <section class="form-card">
+        <div class="form-card-header">
+          <div class="form-card-title">
+            <span>💰</span>
+            <span>2. Opções de Preços & Condições de Pagamento (Slide 13)</span>
+          </div>
+          <span class="form-card-badge">4 Níveis de Proposta</span>
+        </div>
+
+        <div class="pricing-options-grid">
+          <!-- OPÇÃO 1 -->
+          <div class="pricing-box">
+            <div class="pricing-box-header">
+              <span class="pricing-box-title">Opção 1: Pontual</span>
+              <span class="pricing-box-badge">Essencial</span>
+            </div>
+            <div class="form-group-large">
+              <label class="form-label-large" for="opt1-name">Nome do Escopo</label>
+              <input type="text" id="opt1-name" class="form-input-large" value="RECUPERAÇÃO PONTUAL" />
+            </div>
+            <div class="form-group-large">
+              <label class="form-label-large" for="opt1-unit">Valor Unitário / Referência</label>
+              <input type="text" id="opt1-unit" class="form-input-large" value="R$ 3.800,00 / pilar" />
+            </div>
+            <div class="form-group-large">
+              <label class="form-label-large" for="opt1-total">Valor Total da Opção</label>
+              <input type="text" id="opt1-total" class="form-input-large" value="R$ 38.000,00" style="font-weight: 700; color: #f8c300;" />
+            </div>
+            <div class="form-group-large">
+              <label class="form-label-large" for="opt1-down">Sinal / Entrada</label>
+              <input type="text" id="opt1-down" class="form-input-large" value="R$ 7.600,00" />
+            </div>
+            <div class="form-group-large">
+              <label class="form-label-large" for="opt1-inst">Condição de Parcelamento</label>
+              <input type="text" id="opt1-inst" class="form-input-large" value="5 parcelas de R$ 6.080,00" />
+            </div>
+          </div>
+
+          <!-- OPÇÃO 2 -->
+          <div class="pricing-box">
+            <div class="pricing-box-header">
+              <span class="pricing-box-title">Opção 2: Básica</span>
+              <span class="pricing-box-badge">Padrão</span>
+            </div>
+            <div class="form-group-large">
+              <label class="form-label-large" for="opt2-name">Nome do Escopo</label>
+              <input type="text" id="opt2-name" class="form-input-large" value="REVITALIZAÇÃO BÁSICA" />
+            </div>
+            <div class="form-group-large">
+              <label class="form-label-large" for="opt2-unit">Valor Unitário / Referência</label>
+              <input type="text" id="opt2-unit" class="form-input-large" value="R$ 68,00 / m²" />
+            </div>
+            <div class="form-group-large">
+              <label class="form-label-large" for="opt2-total">Valor Total da Opção</label>
+              <input type="text" id="opt2-total" class="form-input-large" value="R$ 74.800,00" style="font-weight: 700; color: #f8c300;" />
+            </div>
+            <div class="form-group-large">
+              <label class="form-label-large" for="opt2-down">Sinal / Entrada</label>
+              <input type="text" id="opt2-down" class="form-input-large" value="R$ 14.960,00" />
+            </div>
+            <div class="form-group-large">
+              <label class="form-label-large" for="opt2-inst">Condição de Parcelamento</label>
+              <input type="text" id="opt2-inst" class="form-input-large" value="6 parcelas de R$ 9.973,33" />
+            </div>
+          </div>
+
+          <!-- OPÇÃO 3 (RECOMENDADA - DESTAQUE) -->
+          <div class="pricing-box featured">
+            <div class="pricing-box-header">
+              <span class="pricing-box-title">Opção 3: Completa (Recomendada ★)</span>
+              <span class="pricing-box-badge">Destaque de Vendas</span>
+            </div>
+            <div class="form-group-large">
+              <label class="form-label-large" for="opt3-name">Nome do Escopo</label>
+              <input type="text" id="opt3-name" class="form-input-large" value="REFORMA COMPLETA" style="font-weight: 700; color: #f8c300;" />
+            </div>
+            <div class="form-group-large">
+              <label class="form-label-large" for="opt3-unit">Valor Unitário / Referência</label>
+              <input type="text" id="opt3-unit" class="form-input-large" value="R$ 95,00 / m²" />
+            </div>
+            <div class="form-group-large">
+              <label class="form-label-large" for="opt3-total">Valor Total da Opção</label>
+              <input type="text" id="opt3-total" class="form-input-large" value="R$ 104.500,00" style="font-weight: 800; font-size: 16px; color: #f8c300; border-color: #f8c300;" />
+            </div>
+            <div class="form-group-large">
+              <label class="form-label-large" for="opt3-down">Sinal / Entrada</label>
+              <input type="text" id="opt3-down" class="form-input-large" value="R$ 20.900,00" />
+            </div>
+            <div class="form-group-large">
+              <label class="form-label-large" for="opt3-inst">Condição de Parcelamento</label>
+              <input type="text" id="opt3-inst" class="form-input-large" value="8 parcelas de R$ 10.450,00" />
+            </div>
+          </div>
+
+          <!-- OPÇÃO 4 -->
+          <div class="pricing-box">
+            <div class="pricing-box-header">
+              <span class="pricing-box-title">Opção 4: Premium</span>
+              <span class="pricing-box-badge">Garantia 5 Anos</span>
+            </div>
+            <div class="form-group-large">
+              <label class="form-label-large" for="opt4-name">Nome do Escopo</label>
+              <input type="text" id="opt4-name" class="form-input-large" value="PREMIUM INTEGRAL" />
+            </div>
+            <div class="form-group-large">
+              <label class="form-label-large" for="opt4-unit">Valor Unitário / Referência</label>
+              <input type="text" id="opt4-unit" class="form-input-large" value="R$ 128,00 / m²" />
+            </div>
+            <div class="form-group-large">
+              <label class="form-label-large" for="opt4-total">Valor Total da Opção</label>
+              <input type="text" id="opt4-total" class="form-input-large" value="R$ 140.800,00" style="font-weight: 700; color: #f8c300;" />
+            </div>
+            <div class="form-group-large">
+              <label class="form-label-large" for="opt4-down">Sinal / Entrada</label>
+              <input type="text" id="opt4-down" class="form-input-large" value="R$ 28.160,00" />
+            </div>
+            <div class="form-group-large">
+              <label class="form-label-large" for="opt4-inst">Condição de Parcelamento</label>
+              <input type="text" id="opt4-inst" class="form-input-large" value="10 parcelas de R$ 11.264,00" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CARD 3: RESPONSÁVEL TÉCNICO E CONTATO -->
+      <section class="form-card">
+        <div class="form-card-header">
+          <div class="form-card-title">
+            <span>👷</span>
+            <span>3. Responsável Técnico & Contatos AFT</span>
+          </div>
+          <span class="form-card-badge">Dados Oficiais</span>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group-large">
+            <label class="form-label-large" for="companyPhone">Telefone / WhatsApp</label>
+            <input type="text" id="companyPhone" class="form-input-large" value="(81) 9 9238-2246" />
+          </div>
+
+          <div class="form-group-large">
+            <label class="form-label-large" for="companyEmail">E-mail Comercial</label>
+            <input type="text" id="companyEmail" class="form-input-large" value="aaftreforma@gmail.com" />
+          </div>
+
+          <div class="form-group-large">
+            <label class="form-label-large" for="companyEngineer">Engenheiro Responsável</label>
+            <input type="text" id="companyEngineer" class="form-input-large" value="Engº Josias Celestino" />
+          </div>
+
+          <div class="form-group-large">
+            <label class="form-label-large" for="companyCrea">Registro CREA/PE</label>
+            <input type="text" id="companyCrea" class="form-input-large" value="CREA/PE Nº 1806255200" />
+          </div>
+        </div>
+      </section>
+
+      <!-- BARRA FLUTUANTE DE AÇÕES -->
+      <div class="floating-actions-bar">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 20px;">⚡</span>
+          <div>
+            <div style="font-weight: 700; color: #fff; font-size: 14px;">Pronto para exportar o orçamento?</div>
+            <div style="font-size: 12px; color: #94a3b8;">Suas alterações são salvas automaticamente no navegador.</div>
+          </div>
+        </div>
+
+        <div class="action-buttons-group">
+          <button id="btn-browser-print" class="btn-action-secondary">
+            <span>🖨️</span>
+            <span>Imprimir / PDF Navegador</span>
+          </button>
+          <button id="btn-fullscreen-mode" class="btn-action-secondary">
+            <span>📺</span>
+            <span>Modo Apresentação</span>
+          </button>
+          <button id="btn-generate-pdf" class="btn-action-primary">
+            <span>📄</span>
+            <span>BAIXAR PDF OFICIAL (ALTA DEFINIÇÃO)</span>
+          </button>
+        </div>
       </div>
 
-      <div class="form-grid-2">
-        <div class="form-group-large span-2">
-          <label class="form-label-large" for="clientName">
-            Nome do Condomínio / Edifício
-            <small>(Aparece em destaque na capa do orçamento)</small>
-          </label>
-          <input type="text" id="clientName" class="form-input-large" value="EDIFÍCIO CARVALHO" placeholder="Ex: EDIFÍCIO CARVALHO" />
-        </div>
+    </main>
 
-        <div class="form-group-large">
-          <label class="form-label-large" for="proposalTitle">Título da Proposta</label>
-          <input type="text" id="proposalTitle" class="form-input-large" value="Proposta Reforma e Revitalização de Fachada" />
+    <!-- PAINEL 2: PRÉVIA DOS 14 SLIDES (16:9 AUTO-ADAPTÁVEL) -->
+    <main class="preview-panel" id="view-preview-container">
+      <div class="workspace-topbar">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <span class="slide-counter-badge">14 Slides em Alta Resolução (16:9)</span>
+          <span style="font-size: 13px; color: #94a3b8;">Prévia oficial AFT</span>
         </div>
-
-        <div class="form-group-large">
-          <label class="form-label-large" for="proposalVersion">Versão da Proposta</label>
-          <input type="text" id="proposalVersion" class="form-input-large" value="versão 1" />
-        </div>
-
-        <div class="form-group-large">
-          <label class="form-label-large" for="proposalDate">Data de Emissão</label>
-          <input type="text" id="proposalDate" class="form-input-large" value="26/09/2026" />
-        </div>
-
-        <div class="form-group-large">
-          <label class="form-label-large" for="validityDays">Validade da Proposta (Dias)</label>
-          <input type="number" id="validityDays" class="form-input-large" value="30" />
-        </div>
-      </div>
-    </section>
-
-    <!-- CARD 2: TABELA DE PREÇOS E ESCOPOS (SLIDE 13) -->
-    <section class="form-card">
-      <div class="form-card-header">
-        <div class="form-card-title">
-          <span>💰</span>
-          <span>2. Opções de Preços & Condições de Pagamento (Slide 13)</span>
-        </div>
-        <span class="form-card-badge">4 Níveis de Proposta</span>
-      </div>
-
-      <div class="pricing-options-grid">
-        <!-- OPÇÃO 1 -->
-        <div class="pricing-box">
-          <div class="pricing-box-header">
-            <span class="pricing-box-title">Opção 1: Pontual</span>
-            <span class="pricing-box-badge">Essencial</span>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div class="zoom-controls">
+            <button class="btn-zoom" id="btn-zoom-out" title="Reduzir Zoom">-</button>
+            <span class="zoom-val" id="zoom-text">100%</span>
+            <button class="btn-zoom" id="btn-zoom-in" title="Aumentar Zoom">+</button>
+            <button class="btn-zoom-fit" id="btn-zoom-fit" title="Ajustar automaticamente à largura da tela">📐 Ajustar à Tela</button>
           </div>
-          <div class="form-group-large">
-            <label class="form-label-large" for="opt1-name">Nome do Escopo</label>
-            <input type="text" id="opt1-name" class="form-input-large" value="RECUPERAÇÃO PONTUAL" />
-          </div>
-          <div class="form-group-large">
-            <label class="form-label-large" for="opt1-unit">Valor Unitário / Referência</label>
-            <input type="text" id="opt1-unit" class="form-input-large" value="R$ 3.800,00 / pilar" />
-          </div>
-          <div class="form-group-large">
-            <label class="form-label-large" for="opt1-total">Valor Total da Opção</label>
-            <input type="text" id="opt1-total" class="form-input-large" value="R$ 38.000,00" style="font-weight: 700; color: #f8c300;" />
-          </div>
-          <div class="form-group-large">
-            <label class="form-label-large" for="opt1-down">Sinal / Entrada</label>
-            <input type="text" id="opt1-down" class="form-input-large" value="R$ 7.600,00" />
-          </div>
-          <div class="form-group-large">
-            <label class="form-label-large" for="opt1-inst">Condição de Parcelamento</label>
-            <input type="text" id="opt1-inst" class="form-input-large" value="5 parcelas de R$ 6.080,00" />
-          </div>
-        </div>
-
-        <!-- OPÇÃO 2 -->
-        <div class="pricing-box">
-          <div class="pricing-box-header">
-            <span class="pricing-box-title">Opção 2: Básica</span>
-            <span class="pricing-box-badge">Padrão</span>
-          </div>
-          <div class="form-group-large">
-            <label class="form-label-large" for="opt2-name">Nome do Escopo</label>
-            <input type="text" id="opt2-name" class="form-input-large" value="REVITALIZAÇÃO BÁSICA" />
-          </div>
-          <div class="form-group-large">
-            <label class="form-label-large" for="opt2-unit">Valor Unitário / Referência</label>
-            <input type="text" id="opt2-unit" class="form-input-large" value="R$ 68,00 / m²" />
-          </div>
-          <div class="form-group-large">
-            <label class="form-label-large" for="opt2-total">Valor Total da Opção</label>
-            <input type="text" id="opt2-total" class="form-input-large" value="R$ 74.800,00" style="font-weight: 700; color: #f8c300;" />
-          </div>
-          <div class="form-group-large">
-            <label class="form-label-large" for="opt2-down">Sinal / Entrada</label>
-            <input type="text" id="opt2-down" class="form-input-large" value="R$ 14.960,00" />
-          </div>
-          <div class="form-group-large">
-            <label class="form-label-large" for="opt2-inst">Condição de Parcelamento</label>
-            <input type="text" id="opt2-inst" class="form-input-large" value="6 parcelas de R$ 9.973,33" />
-          </div>
-        </div>
-
-        <!-- OPÇÃO 3 (RECOMENDADA - DESTAQUE) -->
-        <div class="pricing-box featured">
-          <div class="pricing-box-header">
-            <span class="pricing-box-title">Opção 3: Completa (Recomendada ★)</span>
-            <span class="pricing-box-badge">Destaque de Vendas</span>
-          </div>
-          <div class="form-group-large">
-            <label class="form-label-large" for="opt3-name">Nome do Escopo</label>
-            <input type="text" id="opt3-name" class="form-input-large" value="REFORMA COMPLETA" style="font-weight: 700; color: #f8c300;" />
-          </div>
-          <div class="form-group-large">
-            <label class="form-label-large" for="opt3-unit">Valor Unitário / Referência</label>
-            <input type="text" id="opt3-unit" class="form-input-large" value="R$ 95,00 / m²" />
-          </div>
-          <div class="form-group-large">
-            <label class="form-label-large" for="opt3-total">Valor Total da Opção</label>
-            <input type="text" id="opt3-total" class="form-input-large" value="R$ 104.500,00" style="font-weight: 800; font-size: 16px; color: #f8c300; border-color: #f8c300;" />
-          </div>
-          <div class="form-group-large">
-            <label class="form-label-large" for="opt3-down">Sinal / Entrada</label>
-            <input type="text" id="opt3-down" class="form-input-large" value="R$ 20.900,00" />
-          </div>
-          <div class="form-group-large">
-            <label class="form-label-large" for="opt3-inst">Condição de Parcelamento</label>
-            <input type="text" id="opt3-inst" class="form-input-large" value="8 parcelas de R$ 10.450,00" />
-          </div>
-        </div>
-
-        <!-- OPÇÃO 4 -->
-        <div class="pricing-box">
-          <div class="pricing-box-header">
-            <span class="pricing-box-title">Opção 4: Premium</span>
-            <span class="pricing-box-badge">Garantia 5 Anos</span>
-          </div>
-          <div class="form-group-large">
-            <label class="form-label-large" for="opt4-name">Nome do Escopo</label>
-            <input type="text" id="opt4-name" class="form-input-large" value="PREMIUM INTEGRAL" />
-          </div>
-          <div class="form-group-large">
-            <label class="form-label-large" for="opt4-unit">Valor Unitário / Referência</label>
-            <input type="text" id="opt4-unit" class="form-input-large" value="R$ 128,00 / m²" />
-          </div>
-          <div class="form-group-large">
-            <label class="form-label-large" for="opt4-total">Valor Total da Opção</label>
-            <input type="text" id="opt4-total" class="form-input-large" value="R$ 140.800,00" style="font-weight: 700; color: #f8c300;" />
-          </div>
-          <div class="form-group-large">
-            <label class="form-label-large" for="opt4-down">Sinal / Entrada</label>
-            <input type="text" id="opt4-down" class="form-input-large" value="R$ 28.160,00" />
-          </div>
-          <div class="form-group-large">
-            <label class="form-label-large" for="opt4-inst">Condição de Parcelamento</label>
-            <input type="text" id="opt4-inst" class="form-input-large" value="10 parcelas de R$ 11.264,00" />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CARD 3: RESPONSÁVEL TÉCNICO E CONTATO -->
-    <section class="form-card">
-      <div class="form-card-header">
-        <div class="form-card-title">
-          <span>👷</span>
-          <span>3. Responsável Técnico & Contatos AFT</span>
-        </div>
-        <span class="form-card-badge">Dados Oficiais do Engenheiro</span>
-      </div>
-
-      <div class="form-grid-2">
-        <div class="form-group-large">
-          <label class="form-label-large" for="companyPhone">Telefone / WhatsApp</label>
-          <input type="text" id="companyPhone" class="form-input-large" value="(81) 9 9238-2246" />
-        </div>
-
-        <div class="form-group-large">
-          <label class="form-label-large" for="companyEmail">E-mail Comercial</label>
-          <input type="text" id="companyEmail" class="form-input-large" value="aaftreforma@gmail.com" />
-        </div>
-
-        <div class="form-group-large">
-          <label class="form-label-large" for="companyEngineer">Engenheiro Responsável</label>
-          <input type="text" id="companyEngineer" class="form-input-large" value="Engº Josias Celestino" />
-        </div>
-
-        <div class="form-group-large">
-          <label class="form-label-large" for="companyCrea">Registro CREA/PE</label>
-          <input type="text" id="companyCrea" class="form-input-large" value="CREA/PE Nº 1806255200" />
-        </div>
-      </div>
-    </section>
-
-    <!-- BARRA FLUTUANTE DE AÇÕES -->
-    <div class="floating-actions-bar">
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <span style="font-size: 20px;">⚡</span>
-        <div>
-          <div style="font-weight: 700; color: #fff; font-size: 14px;">Pronto para exportar o orçamento?</div>
-          <div style="font-size: 12px; color: #94a3b8;">Suas alterações são salvas automaticamente no navegador.</div>
+          <button onclick="window.open('print.html', '_blank')" class="btn-action-secondary" style="padding: 6px 12px; font-size: 12px;">
+            <span>📺</span>
+            <span>Tela Cheia</span>
+          </button>
         </div>
       </div>
 
-      <div class="action-buttons-group">
-        <button id="btn-browser-print" class="btn-action-secondary">
-          <span>🖨️</span>
-          <span>Imprimir / PDF Navegador</span>
-        </button>
-        <button id="btn-fullscreen-mode" class="btn-action-secondary">
-          <span>📺</span>
-          <span>Modo Apresentação</span>
-        </button>
-        <button id="btn-generate-pdf" class="btn-action-primary">
-          <span>📄</span>
-          <span>BAIXAR PDF OFICIAL (ALTA DEFINIÇÃO)</span>
-        </button>
+      <div class="preview-scroll-container" id="preview-container">
+        <!-- Slides renderizados dinamicamente pelo render-slides.js -->
       </div>
-    </div>
+    </main>
 
-  </main>
-
-  <!-- CONTAINER 2: PRÉVIA DOS 14 SLIDES EM TELA CHEIA (VIEW ALTERNATIVA) -->
-  <main class="preview-panel" id="view-preview-container" style="display: none;">
-    <div class="workspace-topbar">
-      <div style="display: flex; align-items: center; gap: 14px;">
-        <span class="slide-counter-badge">14 Slides em Alta Resolução (16:9)</span>
-        <span style="font-size: 13.5px; color: #94a3b8;">Estrutura executiva completa da proposta AFT</span>
-      </div>
-      <div style="display: flex; align-items: center; gap: 16px;">
-        <div class="zoom-controls">
-          <button class="btn-zoom" id="btn-zoom-out" title="Reduzir Zoom">-</button>
-          <span class="zoom-val" id="zoom-text">50%</span>
-          <button class="btn-zoom" id="btn-zoom-in" title="Aumentar Zoom">+</button>
-        </div>
-        <button onclick="window.open('print.html', '_blank')" class="btn-action-secondary" style="padding: 6px 14px; font-size: 12.5px;">
-          <span>📺</span>
-          <span>Apresentação Completa</span>
-        </button>
-      </div>
-    </div>
-
-    <div class="preview-scroll-container" id="preview-container">
-      <!-- Slides renderizados dinamicamente pelo render-slides.js -->
-    </div>
-  </main>
-
-  <!-- CONTAINER 3: VISÃO DIVIDIDA / SPLIT (VIEW ALTERNATIVA) -->
-  <div class="split-workspace" id="view-split-container" style="display: none;">
-    <div class="split-form-col" id="split-form-target">
-      <!-- Formulário clonado ou exibido aqui -->
-    </div>
-    <div class="split-preview-col" id="split-preview-target">
-      <!-- Prévia rápida -->
-    </div>
   </div>
 
   <!-- TOAST DE CARREGAMENTO / EXPORTAÇÃO PDF -->
@@ -387,45 +383,17 @@
       });
     }
 
-    // Gerenciador de alternância de visualização (Abas)
+    // Gerenciador de alternância de visualização estável
     function switchView(mode) {
-      document.getElementById("tab-form").classList.remove("active");
-      document.getElementById("tab-preview").classList.remove("active");
-      document.getElementById("tab-split").classList.remove("active");
+      document.getElementById("tab-form").classList.toggle("active", mode === "form");
+      document.getElementById("tab-preview").classList.toggle("active", mode === "preview");
+      document.getElementById("tab-split").classList.toggle("active", mode === "split");
 
-      const formContainer = document.getElementById("view-form-container");
-      const previewContainer = document.getElementById("view-preview-container");
-      const splitContainer = document.getElementById("view-split-container");
+      const workspace = document.getElementById("workspace-layout");
+      workspace.className = "workspace-layout mode-" + mode;
 
-      if (mode === "form") {
-        document.getElementById("tab-form").classList.add("active");
-        formContainer.style.display = "block";
-        previewContainer.style.display = "none";
-        splitContainer.style.display = "none";
-      } else if (mode === "preview") {
-        document.getElementById("tab-preview").classList.add("active");
-        formContainer.style.display = "none";
-        previewContainer.style.display = "flex";
-        splitContainer.style.display = "none";
-        if (typeof renderAllSlides === "function") {
-          renderAllSlides();
-        }
-      } else if (mode === "split") {
-        document.getElementById("tab-split").classList.add("active");
-        formContainer.style.display = "none";
-        previewContainer.style.display = "none";
-        splitContainer.style.display = "grid";
-
-        // Mover o formulário para a coluna split
-        const splitForm = document.getElementById("split-form-target");
-        const splitPrev = document.getElementById("split-preview-target");
-        splitForm.appendChild(formContainer);
-        formContainer.style.display = "block";
-        splitPrev.appendChild(previewContainer);
-        previewContainer.style.display = "flex";
-        if (typeof renderAllSlides === "function") {
-          renderAllSlides();
-        }
+      if (window.setViewMode) {
+        window.setViewMode(mode);
       }
     }
   </script>

@@ -1,7 +1,9 @@
 // Gerenciador da Aplicação AFT Reforma Engenharia - Dashboard e Geração de PDF
 
 let currentData = JSON.parse(JSON.stringify(defaultProposalData));
-let currentZoom = 0.5; // 50% scale for comfortable viewing of 1920x1080 slides
+let currentZoom = 0.5;
+let isAutoFit = true;
+let currentViewMode = 'form';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Carregar dados salvos se houver
@@ -9,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (saved) {
     try {
       const parsed = JSON.parse(saved);
-      // Garantir mesclagem com dados padrão para não faltar nenhum campo
       currentData = Object.assign({}, defaultProposalData, parsed);
       if (parsed.company) currentData.company = Object.assign({}, defaultProposalData.company, parsed.company);
       if (parsed.proposal) currentData.proposal = Object.assign({}, defaultProposalData.proposal, parsed.proposal);
@@ -29,9 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Sincronizar inputs
   syncInputsWithData();
 
-  // Render inicial dos 14 slides
-  renderAllSlides();
-
   // Escutar alterações nos campos
   setupInputListeners();
 
@@ -43,7 +41,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Carregar lista de orçamentos salvos
   renderSavedProposalsList();
+
+  // Render inicial dos slides após pequena espera para cálculo de layout
+  setTimeout(() => {
+    renderAllSlides();
+  }, 100);
 });
+
+// Listener de redimensionamento da janela
+window.addEventListener('resize', () => {
+  if (isAutoFit || currentViewMode === 'split') {
+    renderAllSlides();
+  }
+});
+
+// Função chamada ao alternar abas de visualização
+window.setViewMode = function(mode) {
+  currentViewMode = mode;
+  if (mode === 'split') {
+    isAutoFit = true;
+  }
+  setTimeout(() => {
+    renderAllSlides();
+  }, 60);
+};
 
 function syncInputsWithData() {
   const setVal = (id, val) => {
@@ -168,19 +189,47 @@ function renderAllSlides() {
   const slides = Array.from(tempDiv.querySelectorAll('.slide'));
   container.innerHTML = '';
 
-  const scale = currentZoom;
-  const containerWidth = 1920 * scale;
-  const containerHeight = 1080 * scale;
+  // Largura disponível no container de rolagem
+  const containerWidth = container.clientWidth;
+  const availableWidth = Math.max(260, containerWidth - 48);
+
+  let targetWidth;
+  let scale;
+
+  if (isAutoFit || currentViewMode === 'split') {
+    // Modo Auto-Ajuste: a largura se molda perfeitamente à coluna disponível
+    targetWidth = availableWidth;
+    scale = targetWidth / 1920;
+    // Não estica além de 100% (1920px) em telas gigantescas
+    if (scale > 1.0 && currentViewMode !== 'split') {
+      scale = 1.0;
+      targetWidth = 1920;
+    }
+  } else {
+    // Zoom manual
+    scale = currentZoom;
+    targetWidth = 1920 * scale;
+  }
+
+  const targetHeight = Math.round(1080 * scale);
+
+  const zoomText = document.getElementById('zoom-text');
+  if (zoomText) {
+    zoomText.textContent = `${Math.round(scale * 100)}%`;
+  }
 
   slides.forEach((slide) => {
     const scaleContainer = document.createElement('div');
     scaleContainer.className = 'slide-scale-container';
-    scaleContainer.style.width = `${containerWidth}px`;
-    scaleContainer.style.height = `${containerHeight}px`;
+    scaleContainer.style.width = `${Math.round(targetWidth)}px`;
+    scaleContainer.style.height = `${targetHeight}px`;
 
     const scaleInner = document.createElement('div');
     scaleInner.className = 'slide-scale-inner';
+    scaleInner.style.width = '1920px';
+    scaleInner.style.height = '1080px';
     scaleInner.style.transform = `scale(${scale})`;
+    scaleInner.style.transformOrigin = 'top left';
 
     scaleInner.appendChild(slide);
     scaleContainer.appendChild(scaleInner);
@@ -192,27 +241,38 @@ function setupZoomControls() {
   const zoomText = document.getElementById('zoom-text');
   const btnIn = document.getElementById('btn-zoom-in');
   const btnOut = document.getElementById('btn-zoom-out');
-
-  if (!zoomText || !btnIn || !btnOut) return;
+  const btnFit = document.getElementById('btn-zoom-fit');
 
   const updateZoomDisplay = () => {
-    zoomText.textContent = `${Math.round(currentZoom * 100)}%`;
     renderAllSlides();
   };
 
-  btnIn.addEventListener('click', () => {
-    if (currentZoom < 0.9) {
-      currentZoom += 0.1;
-      updateZoomDisplay();
-    }
-  });
+  if (btnIn) {
+    btnIn.addEventListener('click', () => {
+      isAutoFit = false;
+      if (currentZoom < 1.1) {
+        currentZoom += 0.1;
+        updateZoomDisplay();
+      }
+    });
+  }
 
-  btnOut.addEventListener('click', () => {
-    if (currentZoom > 0.3) {
-      currentZoom -= 0.1;
-      updateZoomDisplay();
-    }
-  });
+  if (btnOut) {
+    btnOut.addEventListener('click', () => {
+      isAutoFit = false;
+      if (currentZoom > 0.2) {
+        currentZoom -= 0.1;
+        updateZoomDisplay();
+      }
+    });
+  }
+
+  if (btnFit) {
+    btnFit.addEventListener('click', () => {
+      isAutoFit = true;
+      renderAllSlides();
+    });
+  }
 }
 
 function setupActions() {
@@ -250,7 +310,6 @@ function setupActions() {
         window.URL.revokeObjectURL(downloadUrl);
       } catch (err) {
         console.warn('Erro ao gerar PDF no backend:', err);
-        // Fallback imediato: abre a página de impressão formatada em 16:9
         const usarNavegador = confirm('O serviço em nuvem demorou para responder. Deseja abrir a visualização oficial e salvar em PDF direto pelo seu navegador agora?');
         if (usarNavegador) {
           window.open('/print.html', '_blank');
