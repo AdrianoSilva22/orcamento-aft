@@ -3,6 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AFT Reforma – Gerador de Orçamentos</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/dashboard.css">
+  <style>
+    body{margin:0;font-family:"Inter",sans-serif;background:#f4f7fa;display:flex;justify-content:center;align-items:flex-start;padding-top:2rem;}
+    .container{max-width:960px;width:100%;background:#fff;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.08);overflow:hidden;}
+    header{background:#0c3870;color:#fff;padding:1.5rem 2rem;text-align:center;}
+    header h1{margin:0;font-size:1.8rem;}
+    .form-area{padding:2rem;display:grid;gap:1.5rem;}
+    .form-group{display:flex;flex-direction:column;}
+    .form-group label{margin-bottom:.4rem;font-weight:600;color:#334155;}
+    .form-group input,.form-group select{padding:.85rem 1rem;font-size:1rem;border:1px solid #cbd5e1;border-radius:8px;background:#fafafa;}
+    .actions{display:flex;gap:1rem;justify-content:flex-end;}
+    .actions button{padding:.85rem 1.2rem;border:none;border-radius:8px;font-weight:600;cursor:pointer;transition:filter .2s;}
+    .btn-primary{background:#0c3870;color:#fff;}
+    .btn-secondary{background:#cbd5e1;color:#111827;}
+    .btn-primary:hover,.btn-secondary:hover{filter:brightness(1.05);}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>AFT Reforma – Gerador de Orçamentos</h1>
+    </header>
+    <section class="form-area" id="app">
+      <!-- Content rendered by app.js -->
+    </section>
+    <div class="actions">
+      <button id="btn-browser-print" class="btn-secondary">🖨️ Imprimir / Salvar PDF Navegador</button>
+      <button id="btn-generate-pdf" class="btn-primary">📄 Baixar PDF Oficial (Alta Definição)</button>
+    </div>
+  </div>
+  <script src="./js/default-data.js"></script>
+  <script src="./js/render-slides.js"></script>
+  <script src="./js/app.js"></script>
+  <script>
+    // Authentication guard – if not logged, redirect to login page
+    if (!localStorage.getItem('aft_auth')) {
+      location.href = '/login.html';
+    }
+  </script>
+</body>
+</html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AFT Reforma Engenharia - Sistema Gerador de Orçamentos e Propostas PDF</title>
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/dashboard.css">
