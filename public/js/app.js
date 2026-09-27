@@ -322,7 +322,7 @@ function setupActions() {
     btnPdf.addEventListener('click', async () => {
       if (toast) toast.classList.add('active');
       btnPdf.disabled = true;
-      showToast('info', 'Gerando PDF em alta definição...');
+      showToast('info', 'Gerando PDF oficial em alta resolução... aguarde.');
 
       try {
         const response = await fetch('/api/generate-pdf', {
@@ -351,14 +351,7 @@ function setupActions() {
         showToast('success', 'PDF baixado com sucesso!');
       } catch (err) {
         console.warn('Erro ao gerar PDF no backend:', err);
-        showConfirm(
-          'Serviço em Nuvem',
-          'O servidor de PDF está demorando. Deseja abrir a visualização e imprimir/salvar em PDF direto pelo navegador?',
-          'Abrir Impressão',
-          () => {
-            window.open('/print.html', '_blank');
-          }
-        );
+        showToast('error', 'Não foi possível baixar o PDF. Tente novamente em instantes.');
       } finally {
         if (toast) toast.classList.remove('active');
         btnPdf.disabled = false;

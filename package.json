@@ -18,9 +18,9 @@
   "author": "AFT Reforma Engenharia",
   "license": "ISC",
   "dependencies": {
+    "@sparticuz/chromium": "^123.0.1",
     "cors": "^2.8.6",
     "express": "^5.2.1",
-    "puppeteer-core": "^10.2.0",
-    "chrome-aws-lambda": "^10.1.0"
+    "puppeteer-core": "^22.15.0"
   }
 }
