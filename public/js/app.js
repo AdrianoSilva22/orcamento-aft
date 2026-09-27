@@ -5,6 +5,53 @@ let currentZoom = 0.5;
 let isAutoFit = true;
 let currentViewMode = 'form';
 
+// Notificações Toast e Confirmações Elegantes (SweetAlert2)
+function showToast(icon, title) {
+  if (typeof Swal !== 'undefined') {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      background: '#101c33',
+      color: '#ffffff',
+      iconColor: '#f8c300',
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer);
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
+      }
+    });
+    Toast.fire({ icon, title });
+  } else {
+    console.log(`[Toast ${icon}] ${title}`);
+  }
+}
+
+function showConfirm(title, text, confirmButtonText, onConfirm) {
+  if (typeof Swal !== 'undefined') {
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#f8c300',
+      cancelButtonColor: '#334155',
+      confirmButtonText: `<span style="color: #0c1a30; font-weight: 800;">${confirmButtonText}</span>`,
+      cancelButtonText: 'Cancelar',
+      background: '#101c33',
+      color: '#ffffff',
+      iconColor: '#f8c300'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        onConfirm();
+      }
+    });
+  } else {
+    if (confirm(text)) onConfirm();
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   // Carregar dados salvos se houver
   const saved = localStorage.getItem('aft_proposal_data');
@@ -42,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Carregar lista de orçamentos salvos
   renderSavedProposalsList();
 
-  // Render inicial dos slides após pequena espera para cálculo de layout
+  // Render inicial dos slides
   setTimeout(() => {
     renderAllSlides();
   }, 100);
@@ -55,7 +102,7 @@ window.addEventListener('resize', () => {
   }
 });
 
-// Função chamada ao alternar abas de visualização
+// Alternância de abas de visão
 window.setViewMode = function(mode) {
   currentViewMode = mode;
   if (mode === 'split') {
@@ -189,7 +236,6 @@ function renderAllSlides() {
   const slides = Array.from(tempDiv.querySelectorAll('.slide'));
   container.innerHTML = '';
 
-  // Largura disponível no container de rolagem
   const containerWidth = container.clientWidth;
   const availableWidth = Math.max(260, containerWidth - 48);
 
@@ -197,16 +243,13 @@ function renderAllSlides() {
   let scale;
 
   if (isAutoFit || currentViewMode === 'split') {
-    // Modo Auto-Ajuste: a largura se molda perfeitamente à coluna disponível
     targetWidth = availableWidth;
     scale = targetWidth / 1920;
-    // Não estica além de 100% (1920px) em telas gigantescas
     if (scale > 1.0 && currentViewMode !== 'split') {
       scale = 1.0;
       targetWidth = 1920;
     }
   } else {
-    // Zoom manual
     scale = currentZoom;
     targetWidth = 1920 * scale;
   }
@@ -238,7 +281,6 @@ function renderAllSlides() {
 }
 
 function setupZoomControls() {
-  const zoomText = document.getElementById('zoom-text');
   const btnIn = document.getElementById('btn-zoom-in');
   const btnOut = document.getElementById('btn-zoom-out');
   const btnFit = document.getElementById('btn-zoom-fit');
@@ -271,6 +313,7 @@ function setupZoomControls() {
     btnFit.addEventListener('click', () => {
       isAutoFit = true;
       renderAllSlides();
+      showToast('info', 'Prévia ajustada à tela');
     });
   }
 }
@@ -284,6 +327,7 @@ function setupActions() {
     btnPdf.addEventListener('click', async () => {
       if (toast) toast.classList.add('active');
       btnPdf.disabled = true;
+      showToast('info', 'Gerando PDF em alta definição...');
 
       try {
         const response = await fetch('/api/generate-pdf', {
@@ -308,12 +352,18 @@ function setupActions() {
         a.click();
         a.remove();
         window.URL.revokeObjectURL(downloadUrl);
+
+        showToast('success', 'PDF baixado com sucesso!');
       } catch (err) {
         console.warn('Erro ao gerar PDF no backend:', err);
-        const usarNavegador = confirm('O serviço em nuvem demorou para responder. Deseja abrir a visualização oficial e salvar em PDF direto pelo seu navegador agora?');
-        if (usarNavegador) {
-          window.open('/print.html', '_blank');
-        }
+        showConfirm(
+          'Serviço em Nuvem',
+          'O servidor de PDF está demorando. Deseja abrir a visualização e imprimir/salvar em PDF direto pelo navegador?',
+          'Abrir Impressão',
+          () => {
+            window.open('/print.html', '_blank');
+          }
+        );
       } finally {
         if (toast) toast.classList.remove('active');
         btnPdf.disabled = false;
@@ -349,13 +399,18 @@ function setupActions() {
   const btnReset = document.getElementById('btn-reset-data');
   if (btnReset) {
     btnReset.addEventListener('click', () => {
-      if (confirm('Deseja restaurar todos os valores para o modelo padrão (Edifício Carvalho)?')) {
-        currentData = JSON.parse(JSON.stringify(defaultProposalData));
-        localStorage.setItem('aft_proposal_data', JSON.stringify(currentData));
-        syncInputsWithData();
-        renderAllSlides();
-        alert('Modelo de exemplo restaurado com sucesso!');
-      }
+      showConfirm(
+        'Restaurar Modelo Padrão',
+        'Deseja restaurar todos os valores para o modelo de exemplo (Edifício Carvalho)?',
+        'Restaurar',
+        () => {
+          currentData = JSON.parse(JSON.stringify(defaultProposalData));
+          localStorage.setItem('aft_proposal_data', JSON.stringify(currentData));
+          syncInputsWithData();
+          renderAllSlides();
+          showToast('success', 'Modelo restaurado com sucesso!');
+        }
+      );
     });
   }
 }
@@ -381,7 +436,7 @@ function saveCurrentProposalToLibrary() {
   }
   localStorage.setItem('aft_saved_library', JSON.stringify(library));
   renderSavedProposalsList();
-  alert(`Orçamento para "${name}" salvo com sucesso no navegador!`);
+  showToast('success', `Orçamento "${name}" salvo!`);
 }
 
 function loadProposalFromLibrary(index) {
@@ -391,6 +446,7 @@ function loadProposalFromLibrary(index) {
     localStorage.setItem('aft_proposal_data', JSON.stringify(currentData));
     syncInputsWithData();
     renderAllSlides();
+    showToast('info', `Orçamento carregado: ${currentData.proposal.clientName}`);
   }
 }
 

@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
@@ -360,10 +361,10 @@
 
     // Botão de Logout
     document.getElementById("btn-logout").addEventListener("click", () => {
-      if (confirm("Deseja realmente sair do sistema?")) {
+      showConfirm("Sair do Sistema", "Deseja realmente sair do gerador de orçamentos?", "Sim, Sair", () => {
         localStorage.removeItem("aft_auth");
         window.location.href = "index.html";
-      }
+      });
     });
 
     // Sincronizar botões do cabeçalho com os do rodapé
