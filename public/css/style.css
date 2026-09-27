@@ -1,0 +1,1118 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --primary-blue: #09387e;
+  --secondary-blue: #0f4c9c;
+  --dark-blue: #072554;
+  --navy-deep: #051a3a;
+  --accent-yellow: #f8c300;
+  --accent-yellow-light: #ffea79;
+  --accent-green: #10b981;
+  --text-dark: #1e293b;
+  --text-muted: #475569;
+  --text-light: #ffffff;
+  --bg-slide: #f4f6fa;
+  --border-light: #e2e8f0;
+  --card-bg: #ffffff;
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--text-dark);
+  background-color: #1e293b;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Slide Base Structure - Fixed 16:9 standard for print & presentation */
+.slide-deck {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding: 30px 0;
+}
+
+.slide {
+  width: 1920px;
+  height: 1080px;
+  position: relative;
+  background-color: var(--bg-slide);
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  page-break-after: always;
+  break-after: page;
+}
+
+/* Standard Header for Content Slides (Matching Reference PDF) */
+.slide-header {
+  position: relative;
+  background-color: var(--primary-blue);
+  color: var(--text-light);
+  padding: 16px 50px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 10px solid var(--accent-yellow);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 10;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.header-company-tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.check-badge {
+  background: var(--accent-yellow);
+  color: var(--primary-blue);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.slide-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 34px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.header-logo {
+  height: 65px;
+  display: flex;
+  align-items: center;
+}
+
+.header-logo img,
+.header-logo svg {
+  height: 60px;
+  width: auto;
+}
+
+/* Standard Footer for All Slides */
+.slide-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 54px;
+  background-color: var(--accent-yellow);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 40px;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--primary-blue);
+  z-index: 10;
+}
+
+.footer-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-item svg,
+.footer-item i {
+  font-size: 22px;
+}
+
+/* Slide Body Container */
+.slide-content {
+  flex: 1;
+  padding: 40px 60px 80px;
+  display: flex;
+  gap: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ========================================================
+   SLIDE 1: CAPA (COVER)
+   ======================================================== */
+.slide-cover {
+  background: linear-gradient(135deg, #072a6b 0%, #051d4d 100%);
+  color: var(--text-light);
+  flex-direction: row;
+  padding: 0;
+}
+
+.cover-left {
+  width: 44%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.cover-left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+}
+
+.cover-right {
+  width: 56%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 80px 80px 30px;
+  position: relative;
+}
+
+.cover-badge-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 50px;
+}
+
+.badge-arrow-icon {
+  width: 54px;
+  height: 54px;
+  background-color: var(--accent-yellow);
+  color: var(--primary-blue);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 900;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(248, 195, 0, 0.4);
+}
+
+.badge-headline {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 27px;
+  font-weight: 800;
+  line-height: 1.35;
+  color: var(--accent-yellow);
+  text-transform: uppercase;
+  max-width: 650px;
+}
+
+.cover-logo-box {
+  border: 4px solid var(--accent-yellow);
+  border-radius: 12px;
+  padding: 30px 45px;
+  margin-bottom: 70px;
+  max-width: 680px;
+  background: rgba(7, 37, 84, 0.5);
+  backdrop-filter: blur(8px);
+  position: relative;
+}
+
+.cover-logo-box::before,
+.cover-logo-box::after {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-color: #ffffff;
+  border-style: solid;
+}
+
+.cover-logo-box::before {
+  top: -6px;
+  left: -6px;
+  border-width: 6px 0 0 6px;
+}
+
+.cover-logo-box::after {
+  bottom: -6px;
+  right: -6px;
+  border-width: 0 6px 6px 0;
+}
+
+.cover-client-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.client-name-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 46px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.proposal-subtitle {
+  font-size: 26px;
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+.proposal-date {
+  font-size: 22px;
+  color: var(--accent-yellow);
+  font-weight: 700;
+}
+
+/* ========================================================
+   SLIDE 2: A EVOLUÇÃO DAS REFORMAS
+   ======================================================== */
+.slide-grid-two {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 50px;
+  width: 100%;
+  align-items: center;
+}
+
+.feature-image-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 4px solid #ffffff;
+  height: 680px;
+}
+
+.feature-image-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.feature-image-card .image-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to top, rgba(7, 37, 84, 0.95), transparent);
+  color: #ffffff;
+  padding: 30px 25px 20px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.check-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #ffffff;
+  padding: 14px 20px;
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+  border-left: 5px solid var(--accent-yellow);
+  transition: transform 0.2s;
+}
+
+.check-item-icon {
+  width: 28px;
+  height: 28px;
+  background: var(--accent-yellow);
+  color: var(--primary-blue);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.check-item-text {
+  font-size: 21px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+/* ========================================================
+   SLIDE 3: O MAIOR ESPECIALISTA / MAPA
+   ======================================================== */
+.slide-map-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 50px;
+  align-items: center;
+  width: 100%;
+}
+
+.map-card {
+  height: 680px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 4px solid #ffffff;
+  background: #ffffff;
+}
+
+.map-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.authority-content {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.authority-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 38px;
+  font-weight: 900;
+  color: var(--primary-blue);
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.authority-bracket-box {
+  border-left: 6px solid var(--primary-blue);
+  padding: 10px 0 10px 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.authority-bullet {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--secondary-blue);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.stats-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+/* ========================================================
+   SLIDES 4 & 5: ESTRUTURA OPERACIONAL / CREDIBILIDADE
+   ======================================================== */
+.full-photo-slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 4px solid #ffffff;
+}
+
+.full-photo-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.callout-badge {
+  position: absolute;
+  background: var(--accent-yellow);
+  color: var(--primary-blue);
+  padding: 16px 30px;
+  border-radius: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  text-transform: uppercase;
+}
+
+.callout-badge.top-right {
+  top: 40px;
+  right: 50px;
+}
+
+.callout-badge.bottom-right {
+  bottom: 50px;
+  right: 60px;
+  background: var(--primary-blue);
+  color: #ffffff;
+  border: 3px solid var(--accent-yellow);
+  font-size: 26px;
+  padding: 22px 35px;
+}
+
+/* ========================================================
+   SLIDE 6: DIFERENCIAIS E SEGURANÇA TÉCNICA (ESQUEMA TÉCNICO)
+   ======================================================== */
+.technical-diagram-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr 1fr;
+  gap: 25px;
+  align-items: center;
+  width: 100%;
+}
+
+.tech-column {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.tech-card {
+  background: #ffffff;
+  padding: 16px 20px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  border-top: 4px solid var(--primary-blue);
+}
+
+.tech-card-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--primary-blue);
+  margin-bottom: 6px;
+}
+
+.tech-card-desc {
+  font-size: 16px;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+.tech-center-image {
+  height: 690px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 4px solid #ffffff;
+  position: relative;
+}
+
+.tech-center-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tech-center-label {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(7, 37, 84, 0.9);
+  color: var(--accent-yellow);
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: 800;
+  font-size: 18px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ========================================================
+   SLIDE 7: TESTES DE SEGURANÇA E QUALIDADE
+   ======================================================== */
+.tests-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 50px;
+  width: 100%;
+  align-items: center;
+}
+
+.tests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.test-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: #ffffff;
+  padding: 18px 24px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  border-left: 6px solid var(--accent-yellow);
+}
+
+.test-title {
+  font-size: 21px;
+  font-weight: 800;
+  color: var(--primary-blue);
+  margin-bottom: 4px;
+}
+
+.test-desc {
+  font-size: 18px;
+  color: var(--text-muted);
+}
+
+.test-guarantee-banner {
+  background: var(--primary-blue);
+  color: #ffffff;
+  padding: 24px 30px;
+  border-radius: 12px;
+  border: 3px solid var(--accent-yellow);
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: var(--shadow-md);
+}
+
+/* ========================================================
+   SLIDE 8: RESPONSABILIDADE TÉCNICA & ART CREA-PE
+   ======================================================== */
+.patent-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 50px;
+  width: 100%;
+  align-items: center;
+}
+
+.patent-doc-frame {
+  height: 690px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 6px solid #ffffff;
+  position: relative;
+  background: #ffffff;
+}
+
+.patent-doc-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.patent-badge-top {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: var(--primary-blue);
+  color: var(--accent-yellow);
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-align: center;
+  border: 2px solid var(--accent-yellow);
+}
+
+/* ========================================================
+   SLIDE 9: CASOS REAIS / SEGURANÇA NA PRÁTICA
+   ======================================================== */
+.cases-triptych {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+  width: 100%;
+  height: 100%;
+}
+
+.case-card {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.case-card-img {
+  height: 380px;
+  position: relative;
+}
+
+.case-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.case-tag {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: #ef4444;
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.case-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.case-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.45;
+}
+
+.case-resolution {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 2px dashed #e2e8f0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary-blue);
+}
+
+/* ========================================================
+   SLIDE 11: REFERÊNCIAS DE CLIENTES
+   ======================================================== */
+.client-ref-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  width: 100%;
+}
+
+.client-list-column {
+  background: #ffffff;
+  padding: 25px 35px;
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 5px solid var(--primary-blue);
+}
+
+.client-entry {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--secondary-blue);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.client-entry::before {
+  content: "•";
+  color: var(--accent-yellow);
+  font-size: 28px;
+}
+
+.client-banner-total {
+  grid-column: 1 / -1;
+  background: var(--primary-blue);
+  color: #ffffff;
+  padding: 20px 30px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 900;
+  border-bottom: 5px solid var(--accent-yellow);
+}
+
+/* ========================================================
+   SLIDE 12: EDIFÍCIOS VALORIZADOS
+   ======================================================== */
+.building-showcase-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 4px solid #ffffff;
+  position: relative;
+}
+
+.building-showcase-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.building-labels-row {
+  position: absolute;
+  bottom: 25px;
+  left: 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 0 40px;
+  gap: 30px;
+  z-index: 10;
+}
+
+.building-label-badge {
+  background: var(--accent-yellow);
+  color: var(--primary-blue);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  text-align: center;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  text-transform: uppercase;
+  margin: 0 auto;
+  width: 80%;
+  border: 2px solid #ffffff;
+}
+
+/* ========================================================
+   SLIDE 13: PROPOSTA COMERCIAL / TABELA DE VALORES
+   ======================================================== */
+.proposal-table-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.proposal-cards-header {
+  display: grid;
+  grid-template-columns: 1.8fr 1.8fr 1.8fr 1.8fr;
+  gap: 20px;
+  margin-left: 280px;
+}
+
+.scope-thumbnail-card {
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 3px solid #e2e8f0;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.scope-thumbnail-card.featured {
+  border-color: var(--accent-yellow);
+  box-shadow: 0 8px 20px rgba(248, 195, 0, 0.35);
+  transform: translateY(-6px);
+}
+
+.scope-thumb-img {
+  height: 110px;
+  background-color: #e2e8f0;
+  overflow: hidden;
+}
+
+.scope-thumb-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.scope-thumb-label {
+  padding: 10px 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 900;
+  background: var(--accent-yellow);
+  color: var(--primary-blue);
+  text-transform: uppercase;
+}
+
+.scope-thumbnail-card.featured .scope-thumb-label {
+  background: var(--primary-blue);
+  color: var(--accent-yellow);
+}
+
+.proposal-matrix-container {
+  display: grid;
+  grid-template-columns: 3.5fr 1.4fr;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.pricing-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.pricing-table th,
+.pricing-table td {
+  padding: 20px 16px;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+}
+
+.pricing-table th {
+  background: var(--primary-blue);
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.pricing-table td.row-header {
+  text-align: left;
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--primary-blue);
+  background: #f8fafc;
+  padding-left: 24px;
+}
+
+.pricing-table td.value-cell {
+  font-size: 21px;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.pricing-table td.highlight-col {
+  background: #fffbeb;
+  color: #b45309;
+  font-weight: 900;
+  border-left: 3px solid var(--accent-yellow);
+  border-right: 3px solid var(--accent-yellow);
+}
+
+.pricing-table tr.total-row td {
+  background: #f1f5f9;
+  font-size: 23px;
+  font-weight: 900;
+  color: var(--primary-blue);
+}
+
+.pricing-table tr.total-row td.highlight-col {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+/* Schedule side box */
+.schedule-box {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 2px solid #e2e8f0;
+}
+
+.schedule-header {
+  background: var(--primary-blue);
+  color: #ffffff;
+  padding: 16px 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: 900;
+  text-align: center;
+  text-transform: uppercase;
+  border-bottom: 4px solid var(--accent-yellow);
+}
+
+.schedule-list {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.schedule-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 10px;
+}
+
+.schedule-item:last-child {
+  border-bottom: none;
+}
+
+.schedule-period {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--primary-blue);
+}
+
+.schedule-desc {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+.validity-strip {
+  background: var(--primary-blue);
+  color: #ffffff;
+  padding: 14px 20px;
+  border-radius: 8px;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+/* ========================================================
+   SLIDE 14: CONTATO E ENCERRAMENTO
+   ======================================================== */
+.slide-contact {
+  background: linear-gradient(135deg, #072a6b 0%, #051d4d 100%);
+  color: #ffffff;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.contact-center-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 35px;
+  max-width: 900px;
+  z-index: 10;
+}
+
+.contact-logo-box {
+  border: 4px solid var(--accent-yellow);
+  border-radius: 16px;
+  padding: 30px 60px;
+  background: rgba(7, 37, 84, 0.6);
+  backdrop-filter: blur(10px);
+}
+
+.contact-slogan {
+  font-size: 32px;
+  font-weight: 500;
+  color: #f1f5f9;
+  line-height: 1.35;
+}
+
+.cta-button-card {
+  display: flex;
+  align-items: center;
+  background: var(--accent-yellow);
+  color: var(--primary-blue);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(248, 195, 0, 0.4);
+}
+
+.cta-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  padding: 18px 40px;
+  text-transform: uppercase;
+}
+
+.cta-arrow {
+  background: var(--primary-blue);
+  color: var(--accent-yellow);
+  width: 75px;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  font-weight: 900;
+}
+
+.contact-phone-badge {
+  background: var(--accent-yellow);
+  color: var(--primary-blue);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 38px;
+  font-weight: 900;
+  padding: 14px 45px;
+  border-radius: 12px;
+  letter-spacing: 1px;
+}
+
+.contact-meta-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 22px;
+  color: #cbd5e1;
+}
+
+/* ========================================================
+   PRINT STYLES: 100% FAITHFUL 16:9 PDF GENERATION
+   ======================================================== */
+@media print {
+  @page {
+    size: 1920px 1080px landscape;
+    margin: 0;
+  }
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  .slide-deck {
+    gap: 0 !important;
+    padding: 0 !important;
+  }
+  .slide {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    width: 1920px !important;
+    height: 1080px !important;
+    min-width: 1920px !important;
+    min-height: 1080px !important;
+  }
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proposta Comercial - AFT Reforma Engenharia</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <style>
+    body {
+      background: transparent;
+      margin: 0;
+      padding: 0;
+    }
+    .slide-deck {
+      padding: 0;
+      gap: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-deck" id="slide-deck-container">
+    <!-- Slides will be injected dynamically -->
+  </div>
+
+  <script src="./js/default-data.js"></script>
+  <script src="./js/render-slides.js"></script>
+  <script>
+    (function() {
+      // Check if custom data was passed in localStorage or query
+      let data = defaultProposalData;
+      try {
+        const stored = localStorage.getItem('aft_proposal_data');
+        if (stored) {
+          data = JSON.parse(stored);
+        }
+      } catch (e) {
+        console.warn('Using default data:', e);
+      }
+
+      // Check URL search params for quick overrides
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('client')) {
+        data.proposal.clientName = urlParams.get('client');
+      }
+
+      const container = document.getElementById('slide-deck-container');
+      container.innerHTML = generateSlidesHTML(data);
+      document.body.classList.add('rendered');
+      window.isReadyForPDF = true;
+    })();
+  </script>
+</body>
+</html>
