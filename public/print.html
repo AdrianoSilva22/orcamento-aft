@@ -37,6 +37,11 @@
         console.warn('Using default data:', e);
       }
 
+      if (!data.company.phone || data.company.phone.includes('8213')) {
+        data.company.phone = "(81) 9 9238-2246";
+        data.company.whatsappLink = "https://wa.me/5581992382246";
+      }
+
       // Check URL search params for quick overrides
       const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.get('client')) {

@@ -1,234 +1,975 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AFT Reforma – Gerador de Orçamentos</title>
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="./css/dashboard.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AFT Reforma Engenharia – Soluções em Revitalização de Fachadas e Reformas Prediais</title>
+  <meta name="description" content="Engenharia especializada em restauração, recuperação estrutural, impermeabilização e revitalização de fachadas em condomínios de Recife e Região Metropolitana." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    body{margin:0;font-family:"Inter",sans-serif;background:#f4f7fa;display:flex;justify-content:center;align-items:flex-start;padding-top:2rem;}
-    .container{max-width:960px;width:100%;background:#fff;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.08);overflow:hidden;}
-    header{background:#0c3870;color:#fff;padding:1.5rem 2rem;text-align:center;}
-    header h1{margin:0;font-size:1.8rem;}
-    .form-area{padding:2rem;display:grid;gap:1.5rem;}
-    .form-group{display:flex;flex-direction:column;}
-    .form-group label{margin-bottom:.4rem;font-weight:600;color:#334155;}
-    .form-group input,.form-group select{padding:.85rem 1rem;font-size:1rem;border:1px solid #cbd5e1;border-radius:8px;background:#fafafa;}
-    .actions{display:flex;gap:1rem;justify-content:flex-end;}
-    .actions button{padding:.85rem 1.2rem;border:none;border-radius:8px;font-weight:600;cursor:pointer;transition:filter .2s;}
-    .btn-primary{background:#0c3870;color:#fff;}
-    .btn-secondary{background:#cbd5e1;color:#111827;}
-    .btn-primary:hover,.btn-secondary:hover{filter:brightness(1.05);}
+    :root {
+      --primary: #09387e;
+      --primary-dark: #051d4d;
+      --secondary: #f8c300;
+      --secondary-hover: #e5b200;
+      --accent: #173b75;
+      --whatsapp-color: #25d366;
+      --whatsapp-hover: #20bd5a;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --bg-light: #f8fafc;
+      --bg-card: #ffffff;
+      --border: #e2e8f0;
+      --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+      --shadow-md: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+      --shadow-lg: 0 20px 30px -10px rgba(9, 56, 126, 0.18);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--bg-light); line-height: 1.6; }
+
+    /* HEADER & NAVEGAÇÃO */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(9, 56, 126, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid var(--secondary);
+      padding: 0.85rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+    }
+    .brand-wrap img {
+      height: 48px;
+      width: auto;
+    }
+    .brand-text {
+      color: #fff;
+    }
+    .brand-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+    }
+    .brand-sub {
+      font-size: 0.75rem;
+      color: var(--secondary);
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.8rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: #e2e8f0;
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: var(--secondary);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    /* Botão chamativo de WhatsApp para o cliente */
+    .btn-nav-whatsapp {
+      background: var(--whatsapp-color);
+      color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 0.65rem 1.15rem;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+    }
+    .btn-nav-whatsapp:hover {
+      background: var(--whatsapp-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(37, 211, 102, 0.5);
+    }
+
+    /* Link discreto para o acesso restrito da equipe técnica */
+    .btn-nav-restrict {
+      background: rgba(255, 255, 255, 0.08);
+      color: #cbd5e1;
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.55rem 0.85rem;
+      border-radius: 6px;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: all 0.2s;
+    }
+    .btn-nav-restrict:hover {
+      background: rgba(255, 255, 255, 0.18);
+      color: #fff;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      position: relative;
+      background: radial-gradient(circle at 60% 40%, #153e7e 0%, #092c63 60%, #051636 100%);
+      color: #ffffff;
+      padding: 5.5rem 2rem 6.5rem;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('./assets/images/recife_building.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.18;
+      mix-blend-mode: overlay;
+    }
+    .hero-container {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(248, 195, 0, 0.15);
+      border: 1px solid rgba(248, 195, 0, 0.4);
+      color: var(--secondary);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 0.4rem 0.9rem;
+      border-radius: 50px;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.85rem;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 span {
+      color: var(--secondary);
+    }
+    .hero p {
+      font-size: 1.12rem;
+      color: #cbd5e1;
+      margin-bottom: 2.2rem;
+      line-height: 1.7;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    /* CTA PRINCIPAL PARA O CLIENTE */
+    .btn-hero-whatsapp {
+      background: var(--whatsapp-color);
+      color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      padding: 1rem 1.85rem;
+      border-radius: 10px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s;
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+    }
+    .btn-hero-whatsapp:hover {
+      background: var(--whatsapp-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(37, 211, 102, 0.55);
+    }
+    .btn-hero-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 1rem 1.75rem;
+      border-radius: 10px;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-hero-secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: #ffffff;
+    }
+
+    .hero-trust {
+      display: flex;
+      gap: 1.8rem;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 1.5rem;
+    }
+    .trust-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .trust-val {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--secondary);
+    }
+    .trust-label {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-card {
+      background: rgba(16, 28, 51, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(12px);
+    }
+    .hero-card img {
+      width: 100%;
+      height: 270px;
+      object-fit: cover;
+      display: block;
+      border-bottom: 3px solid var(--secondary);
+    }
+    .hero-card-body {
+      padding: 1.8rem;
+    }
+    .hero-card-tag {
+      color: var(--secondary);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.4rem;
+    }
+    .hero-card-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 0.75rem;
+    }
+    .hero-card-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      font-size: 0.88rem;
+      color: #cbd5e1;
+    }
+    .hero-card-features li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-card-features li span {
+      color: var(--secondary);
+      font-weight: bold;
+    }
+
+    /* SERVIÇOS ESPECIALIZADOS */
+    .section-py {
+      padding: 5rem 2rem;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-header {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 3.5rem;
+    }
+    .section-badge {
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 0.5rem;
+      display: inline-block;
+    }
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: #0c1a30;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(9, 56, 126, 0.25);
+    }
+    .service-img {
+      height: 200px;
+      width: 100%;
+      object-fit: cover;
+    }
+    .service-body {
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .service-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 0.65rem;
+    }
+    .service-desc {
+      font-size: 0.92rem;
+      color: #475569;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+      flex: 1;
+    }
+    .service-action-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .service-action-link:hover {
+      color: var(--whatsapp-color);
+    }
+
+    /* DIFERENCIAIS TÉCNICOS */
+    .diff-section {
+      background: #092c63;
+      color: #ffffff;
+    }
+    .diff-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .diff-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .diff-item {
+      display: flex;
+      gap: 1.2rem;
+    }
+    .diff-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(248, 195, 0, 0.15);
+      border: 1px solid var(--secondary);
+      color: var(--secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .diff-item h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 0.3rem;
+    }
+    .diff-item p {
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+    .diff-image-box img {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      border: 2px solid rgba(248, 195, 0, 0.5);
+    }
+
+    /* CONDOMÍNIOS ATENDIDOS */
+    .clients-strip {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 3.5rem 2rem;
+      text-align: center;
+    }
+    .clients-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+    .clients-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.85rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .client-pill {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      color: #1e293b;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 0.55rem 1.1rem;
+      border-radius: 50px;
+      transition: all 0.2s;
+    }
+    .client-pill:hover {
+      background: #09387e;
+      color: #ffffff;
+      border-color: #09387e;
+      transform: translateY(-2px);
+    }
+
+    /* CONTATO E RESPONSÁVEL TÉCNICO */
+    .contact-card {
+      background: linear-gradient(135deg, #09387e 0%, #051d4d 100%);
+      color: #fff;
+      border-radius: 20px;
+      padding: 3.5rem 3rem;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 3rem;
+      align-items: center;
+      box-shadow: 0 25px 50px rgba(9, 56, 126, 0.25);
+    }
+    .contact-card h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .contact-card p {
+      color: #cbd5e1;
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+    }
+    .contact-info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+    .contact-info-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.05rem;
+      color: #f8fafc;
+    }
+    .contact-info-item a {
+      color: var(--secondary);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .contact-info-item a:hover {
+      text-decoration: underline;
+    }
+    .resp-tecnico-box {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(248, 195, 0, 0.4);
+      padding: 2.2rem;
+      border-radius: 16px;
+      text-align: center;
+    }
+    .resp-badge {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--secondary);
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+    .resp-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 0.25rem;
+    }
+    .resp-crea {
+      font-size: 0.95rem;
+      color: #cbd5e1;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+    .btn-whatsapp-large {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--whatsapp-color);
+      color: #ffffff;
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      padding: 1rem 1.8rem;
+      border-radius: 10px;
+      width: 100%;
+      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
+      transition: all 0.2s;
+    }
+    .btn-whatsapp-large:hover {
+      background: var(--whatsapp-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(37, 211, 102, 0.45);
+    }
+
+    /* FOOTER */
+    footer {
+      background: #030a17;
+      color: #94a3b8;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      font-size: 0.88rem;
+      border-top: 1px solid #1e293b;
+    }
+    .footer-links {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    .footer-links a {
+      color: #64748b;
+      text-decoration: none;
+      font-size: 0.82rem;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover {
+      color: #cbd5e1;
+    }
+
+    @media (max-width: 992px) {
+      .hero-container { grid-template-columns: 1fr; text-align: center; }
+      .hero-buttons { justify-content: center; }
+      .hero-trust { justify-content: center; }
+      .diff-grid { grid-template-columns: 1fr; }
+      .contact-card { grid-template-columns: 1fr; text-align: center; padding: 2rem; }
+      .contact-info-list { align-items: center; }
+      .nav-links { display: none; }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>AFT Reforma – Gerador de Orçamentos</h1>
-    </header>
-    <section class="form-area" id="app">
-      <!-- Content rendered by app.js -->
-    </section>
-    <div class="actions">
-      <button id="btn-browser-print" class="btn-secondary">🖨️ Imprimir / Salvar PDF Navegador</button>
-      <button id="btn-generate-pdf" class="btn-primary">📄 Baixar PDF Oficial (Alta Definição)</button>
+
+  <!-- HEADER NAVIGATION -->
+  <header>
+    <a href="index.html" class="brand-wrap">
+      <img src="./assets/logo-aft-white.svg" alt="AFT Reforma Engenharia" />
+      <div class="brand-text">
+        <div class="brand-title">AFT REFORMA</div>
+        <div class="brand-sub">ENGENHARIA</div>
+      </div>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#servicos">Especialidades</a></li>
+      <li><a href="#diferenciais">Diferenciais Técnicos</a></li>
+      <li><a href="#condominios">Condomínios</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <!-- Botão chamativo de WhatsApp para o cliente -->
+      <a href="https://wa.me/5581992382246?text=Ol%C3%A1%2C%20gostaria%20de%20solicitar%20um%20or%C3%A7amento%20para%20o%20meu%20condom%C3%ADnio." target="_blank" class="btn-nav-whatsapp">
+        <span>💬</span>
+        <span>Chamar no WhatsApp</span>
+      </a>
+
+      <!-- Acesso restrito discreto apenas para o responsável técnico -->
+      <a href="login.html" class="btn-nav-restrict" id="linkAcessoRestrito" title="Acesso Interno da Engenharia">
+        <span>🔒</span>
+        <span>Acesso Restrito</span>
+      </a>
     </div>
-  </div>
-  <script src="./js/default-data.js"></script>
-  <script src="./js/render-slides.js"></script>
-  <script src="./js/app.js"></script>
-  <script>
-    // Authentication guard – if not logged, redirect to login page
-    if (!localStorage.getItem('aft_auth')) {
-      location.href = '/login.html';
-    }
-  </script>
-</body>
-</html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AFT Reforma Engenharia - Sistema Gerador de Orçamentos e Propostas PDF</title>
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="./css/dashboard.css">
-</head>
-<body>
-  <div class="dashboard-wrapper">
-    <!-- SIDEBAR DE EDIÇÃO -->
-    <aside class="editor-sidebar">
-      <div class="sidebar-header">
-        <img src="./assets/logo-aft-white.svg" alt="AFT Logo" class="sidebar-logo" />
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-container">
+      <div>
+        <div class="hero-badge">
+          <span>🛡️</span>
+          <span>Engenharia Diagnóstica e Executiva em Pernambuco</span>
+        </div>
+        <h1>
+          A solução inteligente para <span>recuperar e valorizar</span> a fachada do seu prédio.
+        </h1>
+        <p>
+          Recuperação estrutural profunda, revitalização estética completa, ensaio à percussão em 100% da área e laudos técnicos registrados no CREA/PE com até 5 anos de garantia.
+        </p>
+
+        <div class="hero-buttons">
+          <!-- CTA direto e forte no WhatsApp -->
+          <a href="https://wa.me/5581992382246?text=Ol%C3%A1%2C%20gostaria%20de%20solicitar%20um%20or%C3%A7amento%20para%20o%20meu%20condom%C3%ADnio." target="_blank" class="btn-hero-whatsapp">
+            <span>💬</span>
+            <span>Solicitar Orçamento no WhatsApp</span>
+          </a>
+          <a href="#servicos" class="btn-hero-secondary">
+            <span>📋</span>
+            <span>Conhecer Nossos Serviços</span>
+          </a>
+        </div>
+
+        <div class="hero-trust">
+          <div class="trust-item">
+            <span class="trust-val">+50</span>
+            <span class="trust-label">Condomínios Atendidos</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-val">100%</span>
+            <span class="trust-label">ART CREA/PE</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-val">5 Anos</span>
+            <span class="trust-label">Garantia Técnica</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-val">NR-35</span>
+            <span class="trust-label">Segurança em Altura</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <img src="./assets/images/balancim_obra.jpg" alt="Obra de Restauração Predial AFT" />
+        <div class="hero-card-body">
+          <div class="hero-card-tag">Excelência Operacional</div>
+          <div class="hero-card-title">Segurança e Mão de Obra Própria Certificada</div>
+          <ul class="hero-card-features">
+            <li><span>✓</span> Balancins e andaimes elétricos revisados</li>
+            <li><span>✓</span> Tratamento anticorrosivo em armaduras expostas</li>
+            <li><span>✓</span> Argamassas poliméricas tixotrópicas de alto padrão</li>
+            <li><span>✓</span> Fiscalização direta por Engenheiro Responsável</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS ESPECIALIZADOS -->
+  <section class="section-py" id="servicos">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Nossas Atuações</span>
+        <h2 class="section-title">Engenharia Especializada em Fachadas e Reformas Prediais</h2>
+        <p class="section-subtitle">
+          Soluções completas com metodologia científica para eliminar patologias e garantir a segurança do condomínio.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <!-- Serviço 1 -->
+        <div class="service-card">
+          <img src="./assets/images/recife_building.jpg" alt="Revitalização de Fachadas" class="service-img" />
+          <div class="service-body">
+            <h3 class="service-title">Revitalização de Fachadas</h3>
+            <p class="service-desc">
+              Lavagem pressurizada, substituição e recolocação de pastilhas cerâmicas com argamassa ACIII-E, rejuntamento resinado e impermeabilização com hidrofugante siliconado.
+            </p>
+            <a href="https://wa.me/5581992382246?text=Ol%C3%A1%2C%20tenho%20interesse%20em%20Revitaliza%C3%A7%C3%A3o%20de%20Fachadas." target="_blank" class="service-action-link">
+              <span>Falar sobre Fachadas no WhatsApp</span>
+              <span>➔</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Serviço 2 -->
+        <div class="service-card">
+          <img src="./assets/images/ensaio_percussao.jpg" alt="Recuperação Estrutural" class="service-img" />
+          <div class="service-body">
+            <h3 class="service-title">Recuperação Estrutural</h3>
+            <p class="service-desc">
+              Tratamento integral de armaduras oxidadas, remoção do concreto carbonatado, aplicação de inibidores de corrosão e reconstituição com graute tixotrópico.
+            </p>
+            <a href="https://wa.me/5581992382246?text=Ol%C3%A1%2C%20tenho%20interesse%20em%20Recupera%C3%A7%C3%A3o%20Estrutural." target="_blank" class="service-action-link">
+              <span>Falar sobre Recuperação no WhatsApp</span>
+              <span>➔</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Serviço 3 -->
+        <div class="service-card">
+          <img src="./assets/images/balancim_obra.jpg" alt="Ensaio à Percussão Diagnóstica" class="service-img" />
+          <div class="service-body">
+            <h3 class="service-title">Ensaio à Percussão 100%</h3>
+            <p class="service-desc">
+              Mapeamento acústico ponto a ponto em 100% da área da fachada para identificar pastilhas e reboco em processo de destacamento antes que ocorram acidentes.
+            </p>
+            <a href="https://wa.me/5581992382246?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20Ensaio%20%C3%A0%20Percuss%C3%A3o." target="_blank" class="service-action-link">
+              <span>Agendar Ensaio no WhatsApp</span>
+              <span>➔</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Serviço 4 -->
+        <div class="service-card">
+          <img src="./assets/images/area_operacional.jpg" alt="Impermeabilização e Juntas" class="service-img" />
+          <div class="service-body">
+            <h3 class="service-title">Impermeabilizações & Juntas</h3>
+            <p class="service-desc">
+              Tratamento de juntas de dilatação com mastique de poliuretano de alta flexibilidade, eliminando infiltrações e fissuras estruturais entre blocos.
+            </p>
+            <a href="https://wa.me/5581992382246?text=Ol%C3%A1%2C%20preciso%20de%20Impermeabiliza%C3%A7%C3%A3o%20para%20meu%20pr%C3%A9dio." target="_blank" class="service-action-link">
+              <span>Consultar no WhatsApp</span>
+              <span>➔</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Serviço 5 -->
+        <div class="service-card">
+          <img src="./assets/images/crea_art.jpg" alt="Laudos e Responsabilidade Técnica" class="service-img" />
+          <div class="service-body">
+            <h3 class="service-title">Laudos e ART Registrada</h3>
+            <p class="service-desc">
+              Acompanhamento contínuo por Engenheiro Civil qualificado com emissão de ART oficial junto ao CREA/PE e entrega de laudo técnico de conformidade final.
+            </p>
+            <a href="https://wa.me/5581992382246?text=Ol%C3%A1%2C%20preciso%20de%20Laudo%20T%C3%A9cnico%20e%20ART." target="_blank" class="service-action-link">
+              <span>Solicitar Laudo no WhatsApp</span>
+              <span>➔</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Serviço 6 -->
+        <div class="service-card">
+          <img src="./assets/images/recife_tres_edificios.jpg" alt="Individualização de Hidrômetros" class="service-img" />
+          <div class="service-body">
+            <h3 class="service-title">Individualização de Hidrômetros</h3>
+            <p class="service-desc">
+              Projetos e adequações de tubulação hidráulica para cobrança individual por unidade condominial, promovendo justiça financeira e redução de desperdícios.
+            </p>
+            <a href="https://wa.me/5581992382246?text=Ol%C3%A1%2C%20tenho%20interesse%20em%20Individualiza%C3%A7%C3%A3o%20de%20Hidr%C3%B4metros." target="_blank" class="service-action-link">
+              <span>Orçar Hidrômetros no WhatsApp</span>
+              <span>➔</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIFERENCIAIS TÉCNICOS -->
+  <section class="section-py diff-section" id="diferenciais">
+    <div class="container">
+      <div class="diff-grid">
         <div>
-          <div class="sidebar-header-title">Gerador de Orçamentos</div>
-          <div class="sidebar-header-subtitle">AFT Engenharia</div>
-        </div>
-      </div>
+          <span class="section-badge" style="color: var(--secondary);">Por que a AFT Reforma?</span>
+          <h2 class="section-title" style="color: #ffffff;">O Mais Rigoroso Padrão Técnico de Engenharia Predial</h2>
+          <p style="color: #cbd5e1; font-size: 1.05rem;">
+            Nossas soluções aliam cumprimento irrestrito das normas regulamentadoras brasileiras (ABNT, NR-18 e NR-35) com técnicas construtivas de máxima durabilidade.
+          </p>
 
-      <div class="sidebar-content">
-        <!-- SEÇÃO: GERENCIAR CLIENTES E ORÇAMENTOS -->
-        <div class="form-section" style="border-color: #f8c300;">
-          <div class="section-title">📂 Meus Orçamentos & Modelos</div>
-          <div class="form-group">
-            <label class="form-label" for="saved-proposals-select">Carregar Orçamento Anterior</label>
-            <select id="saved-proposals-select" class="form-input">
-              <option value="">-- Selecionar Orçamento Salvo --</option>
-            </select>
-          </div>
-          <div style="display: flex; gap: 8px;">
-            <button id="btn-save-client" class="btn-secondary" style="flex: 1; padding: 8px 12px; font-size: 12px;">💾 Salvar Este</button>
-            <button id="btn-reset-data" class="btn-secondary" style="flex: 1; padding: 8px 12px; font-size: 12px;">🔄 Restaurar Padrão</button>
-          </div>
-        </div>
-
-        <!-- SEÇÃO: DADOS DO CLIENTE E PROPOSTA -->
-        <div class="form-section">
-          <div class="section-title">🏢 Dados do Cliente & Proposta</div>
-          <div class="form-group">
-            <label class="form-label" for="clientName">Nome do Condomínio / Cliente</label>
-            <input type="text" id="clientName" class="form-input" value="EDIFÍCIO CARVALHO" />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="proposalTitle">Título da Proposta</label>
-            <input type="text" id="proposalTitle" class="form-input" value="Proposta Reforma e Revitalização de Fachada" />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="proposalVersion">Versão</label>
-            <input type="text" id="proposalVersion" class="form-input" value="versão 1" />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="proposalDate">Data da Proposta</label>
-            <input type="text" id="proposalDate" class="form-input" value="26/09/2026" />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="validityDays">Validade (dias)</label>
-            <input type="number" id="validityDays" class="form-input" value="30" />
-          </div>
-        </div>
-
-        <!-- SEÇÃO: DADOS DA TABELA COMERCIAL (SLIDE 13) -->
-        <div class="form-section">
-          <div class="section-title">💰 Tabela de Preços e Escopos (Slide 13)</div>
-          
-          <!-- Opção 1 -->
-          <div class="pricing-editor-row">
-            <div class="pricing-editor-header">
-              <span>Opção 1: Pontual</span>
+          <div class="diff-list">
+            <div class="diff-item">
+              <div class="diff-icon">👷</div>
+              <div>
+                <h3>Engenheiro Civil em Campo</h3>
+                <p>Responsável Técnico atuante em todas as fases, desde a perícia inicial até a entrega técnica com ART registrada no CREA/PE.</p>
+              </div>
             </div>
-            <input type="text" id="opt1-name" class="form-input" placeholder="Nome do Escopo" value="RECUPERAÇÃO PONTUAL" />
-            <input type="text" id="opt1-unit" class="form-input" placeholder="Valor Unitário / m²" value="R$ 3.800,00 / pilar" />
-            <input type="text" id="opt1-total" class="form-input" placeholder="Valor Total" value="R$ 38.000,00" />
-            <input type="text" id="opt1-down" class="form-input" placeholder="Sinal / Entrada" value="R$ 7.600,00" />
-            <input type="text" id="opt1-inst" class="form-input" placeholder="Parcelamento" value="5 parcelas de R$ 6.080,00" />
-          </div>
 
-          <!-- Opção 2 -->
-          <div class="pricing-editor-row">
-            <div class="pricing-editor-header">
-              <span>Opção 2: Básica</span>
+            <div class="diff-item">
+              <div class="diff-icon">🔬</div>
+              <div>
+                <h3>Materiais Certificados de Primeira Linha</h3>
+                <p>Uso exclusivo de argamassas tixotrópicas estruturais, resinas impermeabilizantes de alta tecnologia e cimentos com cura garantida.</p>
+              </div>
             </div>
-            <input type="text" id="opt2-name" class="form-input" placeholder="Nome do Escopo" value="REVITALIZAÇÃO BÁSICA" />
-            <input type="text" id="opt2-unit" class="form-input" placeholder="Valor Unitário / m²" value="R$ 68,00 / m²" />
-            <input type="text" id="opt2-total" class="form-input" placeholder="Valor Total" value="R$ 74.800,00" />
-            <input type="text" id="opt2-down" class="form-input" placeholder="Sinal / Entrada" value="R$ 14.960,00" />
-            <input type="text" id="opt2-inst" class="form-input" placeholder="Parcelamento" value="6 parcelas de R$ 9.973,33" />
-          </div>
 
-          <!-- Opção 3 (Destaque) -->
-          <div class="pricing-editor-row" style="border-color: #f8c300;">
-            <div class="pricing-editor-header" style="color: #f8c300;">
-              <span>Opção 3: Completa (Destaque ⭐)</span>
+            <div class="diff-item">
+              <div class="diff-icon">🛡️</div>
+              <div>
+                <h3>Garantia Documentada de até 5 Anos</h3>
+                <p>Termo de garantia técnico-jurídica formal para a tranquilidade de síndicos, administradoras e condôminos.</p>
+              </div>
             </div>
-            <input type="text" id="opt3-name" class="form-input" placeholder="Nome do Escopo" value="REFORMA COMPLETA" />
-            <input type="text" id="opt3-unit" class="form-input" placeholder="Valor Unitário / m²" value="R$ 95,00 / m²" />
-            <input type="text" id="opt3-total" class="form-input" placeholder="Valor Total" value="R$ 104.500,00" />
-            <input type="text" id="opt3-down" class="form-input" placeholder="Sinal / Entrada" value="R$ 20.900,00" />
-            <input type="text" id="opt3-inst" class="form-input" placeholder="Parcelamento" value="8 parcelas de R$ 10.450,00" />
           </div>
+        </div>
 
-          <!-- Opção 4 -->
-          <div class="pricing-editor-row">
-            <div class="pricing-editor-header">
-              <span>Opção 4: Premium</span>
+        <div class="diff-image-box">
+          <img src="./assets/images/crea_art.jpg" alt="AFT Engenharia e CREA" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONDOMÍNIOS ATENDIDOS -->
+  <section class="clients-strip" id="condominios">
+    <div class="clients-title">Portfólio de Condomínios e Clientes em Pernambuco</div>
+    <div class="clients-pills">
+      <span class="client-pill">Ed. Saint Louis (Boa Viagem)</span>
+      <span class="client-pill">Ed. Vita Residencial Clube (Imbiribeira)</span>
+      <span class="client-pill">Ed. Golden Home Service (Boa Viagem)</span>
+      <span class="client-pill">Ed. Quinta de São José (San Martin)</span>
+      <span class="client-pill">Ed. Sítio Rosarinho (Rosarinho)</span>
+      <span class="client-pill">Ed. Quinta de Santo Antônio (San Martin)</span>
+      <span class="client-pill">Ed. Vita Praia Residence (Piedade)</span>
+      <span class="client-pill">Ed. Quinta de Casa Forte (San Martin)</span>
+      <span class="client-pill">Ed. Jardim Caxangá (Várzea)</span>
+      <span class="client-pill">Ed. Via Brescia (Torre)</span>
+      <span class="client-pill">Ed. Morumbi Residence (Casa Amarela)</span>
+      <span class="client-pill">Ed. Piazza dos Carvalhos (Olinda)</span>
+      <span class="client-pill">Ed. Rio Sena (Candeias)</span>
+    </div>
+  </section>
+
+  <!-- CONTATO DIRETO COM RESPONSÁVEL TÉCNICO -->
+  <section class="section-py" id="contato">
+    <div class="container">
+      <div class="contact-card">
+        <div>
+          <h2>Fale diretamente com o Engenheiro Responsável</h2>
+          <p>
+            Agende uma visita diagnóstica gratuita no seu condomínio. Analisamos sua fachada e estruturamos uma proposta técnica para a assembleia de moradores.
+          </p>
+
+          <div class="contact-info-list">
+            <div class="contact-info-item">
+              <span>📞</span>
+              <span>Telefone / WhatsApp: <a href="https://wa.me/5581992382246" target="_blank">(81) 9 9238-2246</a></span>
             </div>
-            <input type="text" id="opt4-name" class="form-input" placeholder="Nome do Escopo" value="PREMIUM INTEGRAL" />
-            <input type="text" id="opt4-unit" class="form-input" placeholder="Valor Unitário / m²" value="R$ 128,00 / m²" />
-            <input type="text" id="opt4-total" class="form-input" placeholder="Valor Total" value="R$ 140.800,00" />
-            <input type="text" id="opt4-down" class="form-input" placeholder="Sinal / Entrada" value="R$ 28.160,00" />
-            <input type="text" id="opt4-inst" class="form-input" placeholder="Parcelamento" value="10 parcelas de R$ 11.264,00" />
+            <div class="contact-info-item">
+              <span>✉️</span>
+              <span>E-mail: <a href="mailto:aaftreforma@gmail.com">aaftreforma@gmail.com</a></span>
+            </div>
+            <div class="contact-info-item">
+              <span>📍</span>
+              <span>Recife, Olinda, Jaboatão dos Guararapes e Região Metropolitana - PE</span>
+            </div>
           </div>
         </div>
 
-        <!-- SEÇÃO: CONTATO E RESPONSÁVEL -->
-        <div class="form-section">
-          <div class="section-title">👷 Responsável Técnico & Contato</div>
-          <div class="form-group">
-            <label class="form-label" for="companyPhone">Telefone / WhatsApp</label>
-            <input type="text" id="companyPhone" class="form-input" value="(81) 9 8213-9892" />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="companyEmail">E-mail</label>
-            <input type="text" id="companyEmail" class="form-input" value="aaftreforma@gmail.com" />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="companyEngineer">Engenheiro Responsável</label>
-            <input type="text" id="companyEngineer" class="form-input" value="Engº Josias Celestino" />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="companyCrea">Registro CREA</label>
-            <input type="text" id="companyCrea" class="form-input" value="CREA/PE Nº 1806255200" />
-          </div>
+        <div class="resp-tecnico-box">
+          <div class="resp-badge">Engenheiro Responsável</div>
+          <div class="resp-name">Engº Josias Celestino</div>
+          <div class="resp-crea">CREA/PE Nº 1806255200</div>
+          <a href="https://wa.me/5581992382246?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20visita%20t%C3%A9cnica%20no%20meu%20condom%C3%ADnio." target="_blank" class="btn-whatsapp-large">
+            <span>💬</span>
+            <span>Conversar no WhatsApp</span>
+          </a>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- BOTÕES DE AÇÃO -->
-      <div class="sidebar-actions">
-        <button id="btn-generate-pdf" class="btn-primary">
-          <span>📄</span>
-          <span>Baixar PDF Oficial (Alta Definição)</span>
-        </button>
-        <button id="btn-browser-print" class="btn-secondary">
-          <span>🖨️</span>
-          <span>Imprimir / Salvar PDF Navegador</span>
-        </button>
-        <button id="btn-fullscreen-mode" class="btn-secondary">
-          <span>📺</span>
-          <span>Modo Apresentação (Tela Cheia)</span>
-        </button>
-      </div>
-    </aside>
+  <!-- FOOTER INSTITUCIONAL -->
+  <footer>
+    <p>© 2026 AFT Reforma Engenharia – CNPJ e CREA/PE Regularizados. Todos os direitos reservados.</p>
+    <p style="margin-top: 6px; font-size: 0.84rem;">Recife - PE | Fone/WhatsApp: (81) 9 9238-2246 | E-mail: aaftreforma@gmail.com</p>
+    <div class="footer-links">
+      <a href="#servicos">Especialidades</a>
+      <a href="#diferenciais">Diferenciais</a>
+      <a href="#contato">Fale Conosco</a>
+      <!-- Link discreto para a equipe interna -->
+      <a href="login.html" id="footerAcessoRestrito">Acesso Restrito</a>
+    </div>
+  </footer>
 
-    <!-- ÁREA PRINCIPAL DE VISUALIZAÇÃO -->
-    <main class="preview-workspace">
-      <div class="workspace-topbar">
-        <div class="topbar-left">
-          <span class="slide-counter-badge">14 Slides em Alta Resolução (16:9)</span>
-          <span style="font-size: 14px; color: #94a3b8;">Estrutura executiva idêntica ao modelo da Caixa Smart adaptada para AFT</span>
-        </div>
-        <div class="topbar-right">
-          <div class="zoom-controls">
-            <button class="btn-zoom" id="btn-zoom-out">-</button>
-            <span class="zoom-val" id="zoom-text">50%</span>
-            <button class="btn-zoom" id="btn-zoom-in">+</button>
-          </div>
-        </div>
-      </div>
+  <script>
+    // Se o responsável já estiver logado, adapta os links discretos para o painel de orçamentos
+    document.addEventListener("DOMContentLoaded", () => {
+      const isAuth = localStorage.getItem("aft_auth") === "true";
+      const linkRestrito = document.getElementById("linkAcessoRestrito");
+      const footerRestrito = document.getElementById("footerAcessoRestrito");
 
-      <div class="preview-scroll-container" id="preview-container">
-        <!-- Slides renderizados dinamicamente aqui -->
-      </div>
-    </main>
-  </div>
-
-  <!-- TOAST DE CARREGAMENTO / EXPORTAÇÃO PDF -->
-  <div class="toast-loading" id="toast-loading">
-    <div class="spinner"></div>
-    <div>Gerando PDF oficial de alta definição com Puppeteer... aguarde alguns segundos.</div>
-  </div>
-
-  <script src="./js/default-data.js"></script>
-  <script src="./js/render-slides.js"></script>
-  <script src="./js/app.js"></script>
+      if (isAuth) {
+        if (linkRestrito) {
+          linkRestrito.innerHTML = '<span>⚙️</span><span>Painel Orçamentos</span>';
+          linkRestrito.href = "orcamento.html";
+        }
+        if (footerRestrito) {
+          footerRestrito.textContent = "Painel da Engenharia";
+          footerRestrito.href = "orcamento.html";
+        }
+      }
+    });
+  </script>
 </body>
 </html>

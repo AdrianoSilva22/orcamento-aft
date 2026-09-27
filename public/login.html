@@ -3,53 +3,165 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AFT Reforma – Acesso</title>
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="./css/dashboard.css">
+  <title>AFT Reforma Engenharia – Acesso Restrito</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
   <style>
-    body{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      height:100vh;
-      background:linear-gradient(135deg,#0c3870,#0c3870 50%,#142c4c);
-      font-family:"Inter",sans-serif;
-      color:#fff;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at 50% 20%, #173b75 0%, #081a38 60%, #030a17 100%);
+      font-family: 'Inter', sans-serif;
+      color: #f8fafc;
+      padding: 1.5rem;
     }
-    .login-box{
-      background:#1e2a4e;
-      padding:2rem;
-      border-radius:12px;
-      box-shadow:0 4px 12px rgba(0,0,0,.3);
-      width:340px;
+    .login-card {
+      background: #101c33;
+      border: 1px solid #1e3357;
+      border-top: 4px solid #f8c300;
+      padding: 2.5rem 2rem;
+      border-radius: 16px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
     }
-    .login-box h2{margin:0 0 1.5rem;text-align:center;font-weight:600;}
-    .login-box label{display:block;margin-bottom:.5rem;font-size:.95rem;color:#cbd5e1;}
-    .login-box input{width:100%;padding:.75rem 1rem;margin-bottom:1rem;border:none;border-radius:6px;font-size:1rem;}
-    .login-box button{width:100%;padding:.75rem;background:#f8c300;border:none;border-radius:6px;font-weight:600;cursor:pointer;transition:background .2s;}
-    .login-box button:hover{background:#e5b200;}
-    .error{color:#ff6b6b;text-align:center;margin-top:.5rem;display:none;}
+    .logo-container {
+      margin-bottom: 1.5rem;
+    }
+    .logo-container img {
+      max-height: 48px;
+      width: auto;
+    }
+    .title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 0.35rem;
+    }
+    .subtitle {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      margin-bottom: 1.8rem;
+    }
+    .form-group {
+      text-align: left;
+      margin-bottom: 1.25rem;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.45rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      background: #091224;
+      border: 1px solid #233b66;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      color: #ffffff;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .form-group input:focus {
+      border-color: #f8c300;
+      box-shadow: 0 0 0 3px rgba(248, 195, 0, 0.2);
+    }
+    .btn-submit {
+      width: 100%;
+      padding: 0.95rem;
+      background: linear-gradient(135deg, #f8c300 0%, #e5b200 100%);
+      color: #0c1a30;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 0.95rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: transform 0.15s, box-shadow 0.2s;
+    }
+    .btn-submit:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(248, 195, 0, 0.3);
+    }
+    .error-msg {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid #ef4444;
+      color: #fca5a5;
+      padding: 0.65rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      margin-top: 1rem;
+      display: none;
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 1.5rem;
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover {
+      color: #f8c300;
+    }
   </style>
 </head>
 <body>
-  <div class="login-box">
-    <h2>Área Restrita – AFT Reforma</h2>
-    <label for="loginUser">Usuário</label>
-    <input type="text" id="loginUser" placeholder="andre timoteo">
-    <label for="loginPass">Senha</label>
-    <input type="password" id="loginPass" placeholder="3462">
-    <button id="btnLogin">Entrar</button>
-    <div class="error" id="loginError">Credenciais inválidas.</div>
+  <div class="login-card">
+    <div class="logo-container">
+      <img src="./assets/logo-aft-white.svg" alt="AFT Reforma Engenharia">
+    </div>
+    <h1 class="title">Área Restrita</h1>
+    <p class="subtitle">Acesso exclusivo da Engenharia e Diretoria AFT</p>
+
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="loginUser">Usuário</label>
+        <input type="text" id="loginUser" placeholder="Digite seu usuário" required autocomplete="username">
+      </div>
+      <div class="form-group">
+        <label for="loginPass">Senha</label>
+        <input type="password" id="loginPass" placeholder="Digite sua senha" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn-submit" id="btnLogin">Entrar no Sistema</button>
+      <div class="error-msg" id="loginError">Usuário ou senha incorretos.</div>
+    </form>
+
+    <div>
+      <a href="index.html" class="back-link">← Voltar para o Site</a>
+    </div>
   </div>
+
   <script>
+    // Se já estiver autenticado, vai direto para a tela de orçamento
+    if (localStorage.getItem("aft_auth") === "true") {
+      window.location.href = "orcamento.html";
+    }
+
+    const form = document.getElementById("loginForm");
     const validUser = "andre timoteo";
     const validPass = "3462";
-    document.getElementById("btnLogin").addEventListener("click", () => {
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
       const u = document.getElementById("loginUser").value.trim();
       const p = document.getElementById("loginPass").value.trim();
-      if (u === validUser && p === validPass) {
+
+      if (u.toLowerCase() === validUser.toLowerCase() && p === validPass) {
         localStorage.setItem("aft_auth", "true");
-        location.href = "/index.html";
+        window.location.href = "orcamento.html";
       } else {
         document.getElementById("loginError").style.display = "block";
       }

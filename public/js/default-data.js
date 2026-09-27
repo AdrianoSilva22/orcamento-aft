@@ -6,8 +6,8 @@ const defaultProposalData = {
     engineer: "Engº Josias Celestino",
     crea: "CREA/PE Nº 1806255200",
     email: "aaftreforma@gmail.com",
-    phone: "(81) 9 8213-9892",
-    whatsappLink: "https://wa.me/5581982139892",
+    phone: "(81) 9 9238-2246",
+    whatsappLink: "https://wa.me/5581992382246",
     instagram: "@aftreforma",
     website: "www.aftreforma.com.br",
     cidade: "Recife - PE"
