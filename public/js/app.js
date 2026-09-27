@@ -230,6 +230,10 @@ function renderAllSlides() {
   const container = document.getElementById('preview-container');
   if (!container) return;
 
+  // Salvar posição de rolagem para que ao digitar nunca redirecione pro primeiro slide
+  const savedScrollTop = container.scrollTop;
+  const savedScrollLeft = container.scrollLeft;
+
   const tempDiv = document.createElement('div');
   tempDiv.innerHTML = generateSlidesHTML(currentData);
 
@@ -239,21 +243,12 @@ function renderAllSlides() {
   const containerWidth = container.clientWidth;
   const availableWidth = Math.max(260, containerWidth - 48);
 
-  let targetWidth;
-  let scale;
-
-  if (isAutoFit || currentViewMode === 'split') {
-    targetWidth = availableWidth;
-    scale = targetWidth / 1920;
-    if (scale > 1.0 && currentViewMode !== 'split') {
-      scale = 1.0;
-      targetWidth = 1920;
-    }
-  } else {
-    scale = currentZoom;
-    targetWidth = 1920 * scale;
+  if (isAutoFit) {
+    currentZoom = Math.max(0.2, Math.min(1.0, availableWidth / 1920));
   }
 
+  const scale = currentZoom;
+  const targetWidth = Math.round(1920 * scale);
   const targetHeight = Math.round(1080 * scale);
 
   const zoomText = document.getElementById('zoom-text');
@@ -264,7 +259,7 @@ function renderAllSlides() {
   slides.forEach((slide) => {
     const scaleContainer = document.createElement('div');
     scaleContainer.className = 'slide-scale-container';
-    scaleContainer.style.width = `${Math.round(targetWidth)}px`;
+    scaleContainer.style.width = `${targetWidth}px`;
     scaleContainer.style.height = `${targetHeight}px`;
 
     const scaleInner = document.createElement('div');
@@ -278,6 +273,10 @@ function renderAllSlides() {
     scaleContainer.appendChild(scaleInner);
     container.appendChild(scaleContainer);
   });
+
+  // Restaurar posição de rolagem imediatamente
+  container.scrollTop = savedScrollTop;
+  container.scrollLeft = savedScrollLeft;
 }
 
 function setupZoomControls() {
@@ -285,16 +284,12 @@ function setupZoomControls() {
   const btnOut = document.getElementById('btn-zoom-out');
   const btnFit = document.getElementById('btn-zoom-fit');
 
-  const updateZoomDisplay = () => {
-    renderAllSlides();
-  };
-
   if (btnIn) {
     btnIn.addEventListener('click', () => {
       isAutoFit = false;
-      if (currentZoom < 1.1) {
-        currentZoom += 0.1;
-        updateZoomDisplay();
+      if (currentZoom < 1.3) {
+        currentZoom = Math.min(1.3, Math.round((currentZoom + 0.1) * 10) / 10);
+        renderAllSlides();
       }
     });
   }
@@ -303,8 +298,8 @@ function setupZoomControls() {
     btnOut.addEventListener('click', () => {
       isAutoFit = false;
       if (currentZoom > 0.2) {
-        currentZoom -= 0.1;
-        updateZoomDisplay();
+        currentZoom = Math.max(0.2, Math.round((currentZoom - 0.1) * 10) / 10);
+        renderAllSlides();
       }
     });
   }

@@ -128,15 +128,13 @@
 
     <button class="btn-print-action" id="btnTriggerPrint" onclick="window.print()">
       <span>🖨️</span>
-      <span>IMPRIMIR / SALVAR COMO PDF</span>
+      <span>IMPRIMIR PROPOSTA</span>
     </button>
 
     <a href="orcamento.html" class="btn-back-action">
       <span>←</span>
       <span>Voltar ao Editor</span>
     </a>
-
-    <span class="print-tip">💡 Destino: "Salvar como PDF" • Layout: Paisagem</span>
   </div>
 
   <div class="slide-deck" id="slide-deck-container">
@@ -179,13 +177,6 @@
       container.innerHTML = generateSlidesHTML(data);
       document.body.classList.add('rendered');
       window.isReadyForPDF = true;
-
-      // Se a URL tiver ?autoprint=1, dispara a caixa de impressão automaticamente
-      if (urlParams.get('autoprint') === '1') {
-        setTimeout(() => {
-          window.print();
-        }, 600);
-      }
     })();
   </script>
 </body>

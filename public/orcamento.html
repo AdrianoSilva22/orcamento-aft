@@ -31,12 +31,8 @@
 
     <div class="topbar-actions">
       <button id="btn-generate-pdf-top" class="btn-header-action btn-header-pdf">
-        <span>📄</span>
+        <span>⬇️</span>
         <span>Baixar PDF Oficial</span>
-      </button>
-      <button id="btn-browser-print-top" class="btn-header-action btn-header-print">
-        <span>🖨️</span>
-        <span>Imprimir Navegador</span>
       </button>
       <a href="index.html" class="btn-header-action btn-header-link">
         <span>🌐</span>
@@ -297,17 +293,13 @@
         </div>
 
         <div class="action-buttons-group">
-          <button id="btn-browser-print" class="btn-action-secondary">
-            <span>🖨️</span>
-            <span>Imprimir / PDF Navegador</span>
-          </button>
-          <button id="btn-fullscreen-mode" class="btn-action-secondary">
-            <span>📺</span>
-            <span>Modo Apresentação</span>
+          <button id="btn-view-slides-action" class="btn-action-secondary" onclick="switchView('preview')">
+            <span>👁️</span>
+            <span>Visualizar 14 Slides</span>
           </button>
           <button id="btn-generate-pdf" class="btn-action-primary">
-            <span>📄</span>
-            <span>BAIXAR PDF OFICIAL (ALTA DEFINIÇÃO)</span>
+            <span>⬇️</span>
+            <span>BAIXAR PDF OFICIAL (DOWNLOAD)</span>
           </button>
         </div>
       </div>
@@ -328,7 +320,11 @@
             <button class="btn-zoom" id="btn-zoom-in" title="Aumentar Zoom">+</button>
             <button class="btn-zoom-fit" id="btn-zoom-fit" title="Ajustar automaticamente à largura da tela">📐 Ajustar à Tela</button>
           </div>
-          <button onclick="window.open('print.html', '_blank')" class="btn-action-secondary" style="padding: 6px 12px; font-size: 12px;">
+          <button id="btn-print-from-view" onclick="window.open('print.html', '_blank')" class="btn-action-secondary" style="padding: 7px 14px; font-size: 13px; background: #173b75; border-color: #f8c300; color: #ffffff;">
+            <span>🖨️</span>
+            <span>Imprimir Proposta</span>
+          </button>
+          <button onclick="window.open('print.html', '_blank')" class="btn-action-secondary" style="padding: 7px 14px; font-size: 13px;">
             <span>📺</span>
             <span>Tela Cheia</span>
           </button>
@@ -367,12 +363,9 @@
       });
     });
 
-    // Sincronizar botões do cabeçalho com os do rodapé
+    // Sincronizar botão de download do cabeçalho com o do rodapé
     document.getElementById("btn-generate-pdf-top").addEventListener("click", () => {
       document.getElementById("btn-generate-pdf").click();
-    });
-    document.getElementById("btn-browser-print-top").addEventListener("click", () => {
-      document.getElementById("btn-browser-print").click();
     });
 
     // Atualiza nome do cliente no badge da topbar

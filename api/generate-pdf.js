@@ -23,8 +23,7 @@ module.exports = async (req, res) => {
     });
 
     const page = await browser.newPage();
-    // 1.25 scale factor garante nitidez impecável e corta o tempo de renderização pela metade
-    await page.setViewport({ width: 1920, height: 1080, deviceScaleFactor: 1.25 });
+    await page.setViewport({ width: 1920, height: 1080, deviceScaleFactor: 2 });
 
     // Pass data to frontend via localStorage
     await page.evaluateOnNewDocument((data) => {
@@ -35,10 +34,9 @@ module.exports = async (req, res) => {
 
     const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : `http://localhost:${process.env.PORT || 3000}`;
     const printUrl = `${baseUrl}/print.html`;
-    await page.goto(printUrl, { waitUntil: 'domcontentloaded', timeout: 35000 });
-    await page.waitForSelector('#slide-14', { timeout: 12000 });
-    await page.evaluate(() => document.fonts.ready);
-    await new Promise((r) => setTimeout(r, 350));
+    await page.goto(printUrl, { waitUntil: 'networkidle0', timeout: 60000 });
+    await page.waitForSelector('#slide-14', { timeout: 15000 });
+    await new Promise((r) => setTimeout(r, 1200));
 
     const pdfBuffer = await page.pdf({
       width: '1920px',
