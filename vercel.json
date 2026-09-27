@@ -1,13 +1,16 @@
 {
   "version": 2,
   "functions": {
-    "api/generate-pdf.js": {
+    "api/**/*.js": {
       "runtime": "nodejs18.x",
       "maxDuration": 60,
       "memory": 1024
     }
   },
   "rewrites": [
-    { "source": "/api/generate-pdf", "destination": "/api/generate-pdf.js" }
+    {
+      "source": "/api/generate-pdf",
+      "destination": "/api/generate-pdf.js"
+    }
   ]
 }
