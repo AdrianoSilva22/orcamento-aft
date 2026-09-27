@@ -375,7 +375,7 @@ function setupActions() {
   const btnPrint = document.getElementById('btn-browser-print');
   if (btnPrint) {
     btnPrint.addEventListener('click', () => {
-      window.open('/print.html', '_blank');
+      window.open('/print.html?autoprint=1', '_blank');
     });
   }
 
