@@ -1,6 +1,7 @@
 // api/generate-pdf.js
 const chromium = require('@sparticuz/chromium');
 const puppeteer = require('puppeteer-core');
+const path = require('path');
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
@@ -14,9 +15,15 @@ module.exports = async (req, res) => {
 
   let browser = null;
   try {
+    chromium.setGraphicsMode = false;
     const executablePath = await chromium.executablePath();
+    const execDir = path.dirname(executablePath);
+    process.env.LD_LIBRARY_PATH = process.env.LD_LIBRARY_PATH
+      ? `${execDir}:${process.env.LD_LIBRARY_PATH}`
+      : execDir;
+
     browser = await puppeteer.launch({
-      args: chromium.args,
+      args: [...chromium.args, '--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--single-process'],
       defaultViewport: chromium.defaultViewport,
       executablePath,
       headless: chromium.headless,
