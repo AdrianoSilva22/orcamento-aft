@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupActions();
 
   // Carregar lista de orçamentos salvos
-  renderSavedProposalsList();
+  // renderSavedProposalsList(); // disabled – sidebar removed
 });
 
 function syncInputsWithData() {
@@ -241,14 +241,14 @@ function setupActions() {
   // Restaurar dados padrão de fábrica
   const btnReset = document.getElementById('btn-reset-data');
   if (btnReset) {
-    btnReset.addEventListener('click', () => {
-      if (confirm('Deseja restaurar os valores padrão da proposta?')) {
-        currentData = JSON.parse(JSON.stringify(defaultProposalData));
-        localStorage.setItem('aft_proposal_data', JSON.stringify(currentData));
-        syncInputsWithData();
-        renderAllSlides();
-      }
-    });
+    // btnReset.addEventListener('click', () => { // disabled – sidebar removed
+      // if (confirm('Deseja restaurar os valores padrão da proposta?')) {
+        // currentData = JSON.parse(JSON.stringify(defaultProposalData));
+        // localStorage.setItem('aft_proposal_data', JSON.stringify(currentData));
+        // syncInputsWithData();
+        // renderAllSlides();
+      // }
+    // });
   }
 }
 

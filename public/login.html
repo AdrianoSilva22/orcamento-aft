@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AFT Reforma – Acesso</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/dashboard.css">
+  <style>
+    body{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+      background:linear-gradient(135deg,#0c3870,#0c3870 50%,#142c4c);
+      font-family:"Inter",sans-serif;
+      color:#fff;
+    }
+    .login-box{
+      background:#1e2a4e;
+      padding:2rem;
+      border-radius:12px;
+      box-shadow:0 4px 12px rgba(0,0,0,.3);
+      width:340px;
+    }
+    .login-box h2{margin:0 0 1.5rem;text-align:center;font-weight:600;}
+    .login-box label{display:block;margin-bottom:.5rem;font-size:.95rem;color:#cbd5e1;}
+    .login-box input{width:100%;padding:.75rem 1rem;margin-bottom:1rem;border:none;border-radius:6px;font-size:1rem;}
+    .login-box button{width:100%;padding:.75rem;background:#f8c300;border:none;border-radius:6px;font-weight:600;cursor:pointer;transition:background .2s;}
+    .login-box button:hover{background:#e5b200;}
+    .error{color:#ff6b6b;text-align:center;margin-top:.5rem;display:none;}
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>Área Restrita – AFT Reforma</h2>
+    <label for="loginUser">Usuário</label>
+    <input type="text" id="loginUser" placeholder="andre timoteo">
+    <label for="loginPass">Senha</label>
+    <input type="password" id="loginPass" placeholder="3462">
+    <button id="btnLogin">Entrar</button>
+    <div class="error" id="loginError">Credenciais inválidas.</div>
+  </div>
+  <script>
+    const validUser = "andre timoteo";
+    const validPass = "3462";
+    document.getElementById("btnLogin").addEventListener("click", () => {
+      const u = document.getElementById("loginUser").value.trim();
+      const p = document.getElementById("loginPass").value.trim();
+      if (u === validUser && p === validPass) {
+        localStorage.setItem("aft_auth", "true");
+        location.href = "/index.html";
+      } else {
+        document.getElementById("loginError").style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>
